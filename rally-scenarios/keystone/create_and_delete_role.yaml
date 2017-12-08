@@ -1,0 +1,11 @@
+---
+  KeystoneBasic.create_and_delete_role:
+    -
+      runner:
+        type: "constant"
+        times: {{ compute * 10 }}
+        concurrency: {{ concurrency * 4 }}
+      sla:
+        failure_rate:
+          max: 0
+

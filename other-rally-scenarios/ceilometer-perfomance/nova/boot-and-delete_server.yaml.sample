@@ -1,0 +1,41 @@
+---
+  NovaServers.boot_and_delete_server:
+    -
+      args:
+        min_sleep: {{ sleep }}
+        max_sleep: {{ sleep }}
+        auto_assign_nic: True
+        flavor:
+            name: "m1.nano"
+        image:
+            name: "TestVM"
+        userdata: |
+            #!/bin/sh
+            file=/dev/test.img
+            c=20
+            ping_and_disk_io() {
+                for count in $(seq 1 600);
+                    do
+                        sudo dd if=/dev/zero of=$file bs=1M count=$c &>/dev/null;
+                        sudo dd if=$file of=/dev/null bs=1M &>/dev/null;
+                        [ -f $file ] && sudo rm $file &>/dev/null;
+                        for ip in `ip ro show | grep src | awk '{print $NF}'`
+                            do
+                                ping -c 1 $ip &>/dev/null;
+                            done
+                        done
+            }
+            ping_and_disk_io
+            echo 'HELLO' > /tmp/hello.log
+      runner:
+        type: "rps"
+        times: {{ compute }}
+        rps: {{ concurrency }}
+        timeout: {{ timeout }}
+      context:
+        users:
+          tenants: {{ tenants }}
+          users_per_tenant: {{ users_per_tenant }}
+        network:
+          start_cidr: {{ cidr }}
+          networks_per_tenant: {{ net_per_tenant }}

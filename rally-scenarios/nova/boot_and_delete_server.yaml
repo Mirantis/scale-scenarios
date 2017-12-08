@@ -1,0 +1,39 @@
+---
+  NovaServers.boot_and_delete_server:
+  {% set flavor = flavor or "m1.nano" %}
+  {% set gre_enabled = gre_enabled or False %}
+  {% set initial_cidr = initial_cidr or "100.1.0.0/21" %}
+  {% set alternative_cidr = alternative_cidr or "1.0.0.0/21" %}
+    -
+      args:
+        flavor:
+            name: {{ flavor }}
+        image:
+            name: "TestVM"
+        auto_assign_nic: true
+      runner:
+        type: "constant"
+        times: {{ compute * 20 }}
+        concurrency: {{ concurrency * 4 }}
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+        quotas:
+          nova:
+            instances: -1
+            cores: -1
+            ram: -1
+            floating_ips: -1
+            security_groups: -1
+            security_group_rules: -1
+          neutron:
+            network: -1
+            subnet: -1
+            port: -1
+        network:
+          start_cidr: {{ initial_cidr if gre_enabled else alternative_cidr }}
+          networks_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0

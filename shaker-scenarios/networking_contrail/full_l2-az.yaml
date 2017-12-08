@@ -1,0 +1,36 @@
+description:
+  This scenario launches pairs of VMs in the same private network. Every VM is
+  hosted on a separate compute node.
+
+deployment:
+  template: l2.hot
+  accommodation: [pair, single_room, zones: [az-switch9]]
+execution:
+  progression: quadratic
+  tests:
+  -
+    title: Iperf TCP
+    class: iperf_graph
+    time: 60
+    buffer_size: 128k
+  -
+    title: Iperf3 TCP
+    class: iperf3
+    time: 60
+    buffer_size: 128k
+  -
+    title: TCP download
+    class: flent
+    method: tcp_download
+  -
+    title: TCP bi-directional
+    class: flent
+    method: tcp_bidirectional
+  -
+    title: TCP download - 8 streams w/ping
+    class: flent
+    method: tcp_8down
+  -
+    title: Torrent like competition
+    class: flent
+    method: rrul_torrent

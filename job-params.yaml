@@ -1,0 +1,8 @@
+---
+  concurrency: 10
+  compute: 200
+  gre_enabled: true
+  vlan_amount: 100
+  net_id: "774d8bcb-8821-47e7-b724-854b52354080"
+  current_path: '/home/rally/listomin/mos-scenarios/rally-scenarios/heat'
+  floating_ip_amount: 100

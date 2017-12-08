@@ -1,0 +1,11 @@
+---
+  KeystoneBasic.create_update_and_delete_tenant:
+    -
+      runner:
+        type: "constant"
+        times: {{ compute * 10 }}
+        concurrency: {{ concurrency * 4 }}
+      sla:
+        failure_rate:
+          max: 0
+

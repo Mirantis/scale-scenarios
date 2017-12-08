@@ -1,0 +1,11 @@
+---
+  KeystoneBasic.authenticate_user_and_validate_token:
+   -
+      runner:
+        type: "constant"
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
+      sla:
+        failure_rate:
+          max: 0
+

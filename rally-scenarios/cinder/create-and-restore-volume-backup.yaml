@@ -1,0 +1,26 @@
+---
+  CinderVolumes.create_and_restore_volume_backup:
+    -
+      args:
+        size: 1
+        do_delete: True
+      runner:
+        type: "constant"
+        times: {{ compute * 7 }}
+        concurrency: 2
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+        quotas:
+          cinder:
+            volumes: -1
+            gigabytes: -1
+            snapshots: -1
+        api_versions:
+          cinder:
+            version: 2
+            service_name: cinderv2
+      sla:
+        failure_rate:
+          max: 0

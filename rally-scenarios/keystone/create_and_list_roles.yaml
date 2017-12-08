@@ -1,0 +1,12 @@
+---
+  KeystoneBasic.create_add_and_list_user_roles:
+    -
+      runner:
+        type: "constant"
+        times: {{ compute * 10 }}
+        concurrency: {{ concurrency * 4 }}
+      sla:
+        failure_rate:
+          max: 0
+
+

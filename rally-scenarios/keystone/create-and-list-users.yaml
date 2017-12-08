@@ -1,0 +1,12 @@
+---
+  KeystoneBasic.create_and_list_users:
+    -
+      args:
+        name_length: 10
+      runner:
+        type: "constant"
+        times: {{ compute * 6 }}
+        concurrency: {{ concurrency * 3 }}
+      sla:
+        failure_rate:
+          max: 0

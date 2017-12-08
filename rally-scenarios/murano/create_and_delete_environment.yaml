@@ -1,0 +1,11 @@
+---
+  MuranoEnvironments.create_and_delete_environment:
+    -
+      runner:
+        type: "constant"
+        times: {{ compute * 200 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute * 20 }}
+          users_per_tenant: 2

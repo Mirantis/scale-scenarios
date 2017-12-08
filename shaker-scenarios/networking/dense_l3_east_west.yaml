@@ -1,0 +1,24 @@
+description:
+  This scenario launches pairs of VMs in different networks connected to one
+  router (L3 east-west)
+
+deployment:
+  template: l3_east_west.hot
+  accommodation: [pair, double_room, density: 8, compute_nodes: 1]
+
+execution:
+  progression: quadratic
+  tests:
+  -
+    title: Iperf TCP
+    class: iperf_graph
+    time: 60
+    buffer_size: 8k
+  -
+    title: TCP download
+    class: flent
+    method: tcp_download
+  -
+    title: TCP bi-directional
+    class: flent
+    method: tcp_bidirectional

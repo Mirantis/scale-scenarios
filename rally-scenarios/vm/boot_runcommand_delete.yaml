@@ -1,0 +1,37 @@
+---
+  VMTasks.boot_runcommand_delete:
+  {% set flavor = flavor or "m1.nano" %}
+    -
+      args:
+        flavor:
+            name: {{ flavor }}
+        image:
+            name: "TestVM"
+        floating_network: "{{ floating_net }}"
+        script: "/opt/stack/rally-scenarios/vm/instance_metadata.sh"
+        interpreter: "/bin/sh"
+        username: "cirros"
+      runner:
+        type: "constant"
+        times: {{ [floating_ip_amount - 5, vlan_amount - 5, 50] | sort | first }}
+        concurrency: 25
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+        quotas:
+          nova:
+            instances: -1
+            cores: -1
+            ram: -1
+            floating_ips: -1
+            security_groups: -1
+            security_group_rules: -1
+          neutron:
+            network: -1
+            subnet: -1
+            port: -1
+        network: {}
+      sla:
+        failure_rate:
+          max: 0

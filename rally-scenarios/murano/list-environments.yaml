@@ -1,0 +1,11 @@
+---
+  MuranoEnvironments.list_environments:
+    -
+      runner:
+        type: "constant"
+        times: {{ compute * 20 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute * 2 }}
+          users_per_tenant: 1

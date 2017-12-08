@@ -1,0 +1,19 @@
+description:
+  This scenario launches pairs of VMs on different compute nodes. VMs are in
+  the different networks connected via different routers, master accesses slave
+  by floating ip
+
+deployment:
+  template: l3_north_south.hot
+  accommodation: [pair, single_room]
+
+execution:
+  progression: quadratic
+  tests:
+  -
+    title: Iperf UDP
+    class: iperf
+    udp: 1
+    threads: 2
+    bandwidth: 1000M
+    buffer_size: 8950

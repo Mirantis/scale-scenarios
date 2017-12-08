@@ -1,0 +1,13 @@
+---
+  KeystoneBasic.create_tenant_with_users:
+    -
+      args:
+        name_length: 10
+        users_per_tenant: 100
+      runner:
+        type: "constant"
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
+      sla:
+        failure_rate:
+          max: 0

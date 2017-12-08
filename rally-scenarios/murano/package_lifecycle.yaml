@@ -1,0 +1,15 @@
+---
+  MuranoPackages.package_lifecycle:
+    -
+      args:
+        package: "/opt/stack/rally/rally-jobs/extra/murano/applications/HelloReporter/io.murano.apps.HelloReporter/"
+        body: {"tags": ["tag"]}
+        operation: "add"
+      runner:
+        type: "constant"
+        times: {{ compute * 200 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute * 20 }}
+          users_per_tenant: 1

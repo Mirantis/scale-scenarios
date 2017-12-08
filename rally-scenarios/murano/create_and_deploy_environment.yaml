@@ -1,0 +1,18 @@
+---
+  MuranoPackages.create_and_deploy_environment:
+    -
+      args:
+        packages_per_env: 1
+        app_config: "/opt/stack/rally/rally-jobs/extra/murano/deployment_data/active_directory.json"
+      runner:
+        type: "constant"
+        times: {{ (compute * 25 )//100 }}
+        concurrency: {{ (compute * 25 )//100 }}
+      context:
+        users:
+          tenants: {{ (compute * 25 )//300 }}
+          users_per_tenant: 1
+        murano_import_packages:
+          app_package: "/opt/stack/rally/rally-jobs/extra/murano/applications/ActiveDirectory/"
+        roles:
+          - "admin"

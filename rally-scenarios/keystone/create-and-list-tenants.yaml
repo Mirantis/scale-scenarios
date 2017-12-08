@@ -1,0 +1,12 @@
+---
+  KeystoneBasic.create_and_list_tenants:
+    -
+      args:
+        name_length: 10
+      runner:
+        type: "constant"
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
+      sla:
+        failure_rate:
+          max: 0

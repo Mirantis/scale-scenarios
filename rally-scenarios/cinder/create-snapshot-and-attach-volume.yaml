@@ -1,0 +1,36 @@
+---
+  CinderVolumes.create_snapshot_and_attach_volume:
+    -
+      args:
+        volume_type: "standard-iops"
+        size:
+            min: 1
+            max: 5
+      runner:
+        type: "constant"
+        times: {{ compute * 9 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 1
+        quotas:
+          cinder:
+            volumes: -1
+            gigabytes: -1
+            snapshots: -1
+        servers:
+          image:
+            name: "TestVM"
+          flavor:
+            name: "m1.tiny"
+          servers_per_tenant: 1
+          nics:
+            - net-id: {{ net_id }}
+        api_versions:
+          cinder:
+            version: 2
+            service_name: cinderv2
+      sla:
+        failure_rate:
+          max: 0

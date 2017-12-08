@@ -1,0 +1,75 @@
+---
+  CinderVolumes.create_and_delete_volume:
+    -
+      args:
+        size: 1
+      runner:
+        type: "constant"
+        times: {{ compute * 14 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute * 2 }}
+          users_per_tenant: 3
+        quotas:
+          cinder:
+            volumes: -1
+            gigabytes: -1
+            snapshots: -1
+        api_versions:
+          cinder:
+            version: 2
+            service_name: cinderv2
+      sla:
+        failure_rate:
+          max: 0
+    -
+      args:
+        size: 1
+        image:
+          name: "TestVM"
+      runner:
+        type: "constant"
+        times: {{ compute * 14 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute * 2 }}
+          users_per_tenant: 3
+        quotas:
+          cinder:
+            volumes: -1
+            gigabytes: -1
+            snapshots: -1
+        api_versions:
+          cinder:
+            version: 2
+            service_name: cinderv2
+      sla:
+        failure_rate:
+          max: 0
+    -
+      args:
+        size:
+          min: 100
+          max: 200
+      runner:
+        type: "constant"
+        times: {{ compute * 14 }}
+        concurrency: 1
+      context:
+        users:
+          tenants: {{ compute * 2 }}
+          users_per_tenant: 3
+        quotas:
+          cinder:
+            volumes: -1
+            gigabytes: -1
+            snapshots: -1
+        api_versions:
+          cinder:
+            version: 2
+            service_name: cinderv2
+      sla:
+        failure_rate:
+          max: 0
