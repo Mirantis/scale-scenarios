@@ -4,3 +4,4 @@
   gre_enabled: true
   vlan_amount: 1
   floating_ip_amount: 6
+  net_id: "eaf7e9f5-3241-4d68-8562-a5401595f8f6"
