@@ -1,0 +1,6 @@
+---
+  concurrency: 2 
+  compute: 2
+  gre_enabled: true
+  vlan_amount: 1 
+  floating_ip_amount: 1
