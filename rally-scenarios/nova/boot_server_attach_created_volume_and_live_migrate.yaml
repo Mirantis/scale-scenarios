@@ -11,9 +11,6 @@
         image:
             name: "TestVM"
         size: 2
-        boot_server_kwargs:
-            nics:
-            - net-id: {{ net_id }}
       runner:
         type: "constant"
         times: {{ compute }}
