@@ -3,6 +3,7 @@
   compute: 2
   gre_enabled: true
   vlan_amount: 1
-  current_path: '/home/rally/test_config/rally-scenarios/heat'
+  current_path: '/home/rally/test_config/rally-scenarios'
   floating_ip_amount: 11
   net_id: "eaf7e9f5-3241-4d68-8562-a5401595f8f6"
+  floating_net: "public"
