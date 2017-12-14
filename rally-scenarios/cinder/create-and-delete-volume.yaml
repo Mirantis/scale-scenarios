@@ -51,8 +51,8 @@
     -
       args:
         size:
-          min: 100
-          max: 200
+          min: {{ 100 if not super_light else 1 }}
+          max: {{ 200 if not super_light else 2 }}
       runner:
         type: "constant"
         times: {{ compute * 14 if not super_light else super_light_count }}

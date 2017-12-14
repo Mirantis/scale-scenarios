@@ -2,7 +2,7 @@
   CinderVolumes.create_and_attach_volume:
     -
       args:
-          size: 10
+          size: {{ 10 if not super_light else 1 }}
           image:
             name: "TestVM"
           flavor:
