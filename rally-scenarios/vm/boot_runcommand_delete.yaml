@@ -8,7 +8,7 @@
         image:
             name: "TestVM"
         floating_network: "{{ floating_net }}"
-        script: "/opt/stack/rally-scenarios/vm/instance_metadata.sh"
+        script: "{{ current_path }}/vm/instance_metadata.sh"
         interpreter: "/bin/sh"
         username: "cirros"
       runner:

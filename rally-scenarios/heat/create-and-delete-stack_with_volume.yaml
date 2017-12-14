@@ -2,7 +2,7 @@
   HeatStacks.create_and_delete_stack:
     -
       args:
-        template_path: "{{ current_path }}/templates/server_with_volume.yml.template"
+        template_path: "{{ current_path }}/heat/templates/server_with_volume.yml.template"
       runner:
         timeout: 90
         type: "constant"
