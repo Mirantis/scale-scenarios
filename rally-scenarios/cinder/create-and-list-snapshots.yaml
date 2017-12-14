@@ -6,11 +6,11 @@
         detailed: True
       runner:
         type: "constant"
-        times: {{ compute * 14 }}
+        times: {{ compute * 14 if not super_light else super_light_count }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: {{ compute * 2 }}
+          tenants: {{ compute * 2  }}
           users_per_tenant: 3
         volumes:
           size: 1

@@ -11,7 +11,7 @@
          insufficient_data_actions: ["http://localhost:8776/notok"]
        runner:
          type: "constant"
-         times: 10
+         times: {{ 10 if not super_light else super_light_count }}
          concurrency: 1
        context:
          users:

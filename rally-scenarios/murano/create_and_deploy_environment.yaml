@@ -6,7 +6,7 @@
         app_config: "/opt/stack/rally/rally-jobs/extra/murano/deployment_data/active_directory.json"
       runner:
         type: "constant"
-        times: {{ (compute * 25 )//100 }}
+        times: {{ (compute * 25 )//100 if not super_light else super_light_count }}
         concurrency: {{ (compute * 25 )//100 }}
       context:
         users:

@@ -8,7 +8,7 @@
         disk_format: "qcow2"
       runner:
         type: "constant"
-        times: {{ compute * 6 }}
+        times: {{ compute * 6 if not super_light else super_light_count }}
         concurrency: {{ concurrency }}
       context:
         users:

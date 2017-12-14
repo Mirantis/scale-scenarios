@@ -7,7 +7,7 @@
         operation: "add"
       runner:
         type: "constant"
-        times: {{ compute * 200 }}
+        times: {{ compute * 200 if not super_light else super_light_count }}
         concurrency: {{ concurrency }}
       context:
         users:

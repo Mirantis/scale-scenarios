@@ -10,7 +10,7 @@
             },
             "runner": {
                 "type": "constant",
-                "times": 1000,
+                "times": {{ 1000 if not super_light else super_light_count }},
                 "concurrency": 10
             },
             "context": {

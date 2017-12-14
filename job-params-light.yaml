@@ -2,6 +2,8 @@
   concurrency: 2
   compute: 2
   gre_enabled: true
+  super_light: true
+  super_light_count: 2
   vlan_amount: 1
   current_path: '/home/rally/test_config/rally-scenarios'
   floating_ip_amount: 11

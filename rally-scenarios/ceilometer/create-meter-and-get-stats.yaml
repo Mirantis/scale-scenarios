@@ -9,7 +9,7 @@
          counter_type: "cumulative"
        runner:
          type: "constant"
-         times: 200
+         times: {{ 200 if not super_light else super_light_count }}
          concurrency: 5
        context:
          users:

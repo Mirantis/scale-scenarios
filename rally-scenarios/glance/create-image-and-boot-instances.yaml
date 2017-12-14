@@ -15,11 +15,11 @@
           - net-id: {{ net_id }}
       runner:
         type: "constant"
-        times: {{ compute }}
+        times: {{ compute if not super_light else super_light_count }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: {{ compute }} 
+          tenants: {{ compute }}
           users_per_tenant: 2
       sla:
         failure_rate:
