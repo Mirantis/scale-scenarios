@@ -12,9 +12,6 @@
             name: "TestVM"
         volume_size: 2
         auto_assign_nic: true
-#        boot_server_kwargs:
-#            nics:
-#            - net-id: {{ net_id }}
       runner:
         type: "constant"
         times: {{ compute }}
