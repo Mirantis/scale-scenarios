@@ -4,6 +4,5 @@
   gre_enabled: true
   super_light: false
   vlan_amount: 100
-  net_id: "774d8bcb-8821-47e7-b724-854b52354080"
   current_path: '/home/rally/listomin/mos-scenarios/rally-scenarios'
   floating_ip_amount: 100
