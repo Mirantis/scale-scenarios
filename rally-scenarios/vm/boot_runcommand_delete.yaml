@@ -7,7 +7,6 @@
             name: {{ flavor }}
         image:
             name: "TestVM"
-        floating_network: "{{ floating_net }}"
         command:
           interpreter: "/bin/sh"
           script_file: "{{ current_path }}/vm/instance_metadata.sh"
