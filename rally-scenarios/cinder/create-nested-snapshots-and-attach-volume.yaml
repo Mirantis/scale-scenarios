@@ -6,10 +6,10 @@
               min: 1
               max: 5
           nested_level: 5
-        image:
-          name: "TestVM"
-        flavor:
-            name: "m1.tiny"               
+          image:
+            name: "TestVM"
+          flavor:
+              name: "m1.tiny"
       runner:
         type: "constant"
         times: {{ compute * 4 if not super_light else super_light_count }}
