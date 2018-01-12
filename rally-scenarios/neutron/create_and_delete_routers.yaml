@@ -10,7 +10,7 @@
       runner:
         type: "constant"
         times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
-        concurrency: {{ concurrency }}
+        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       context:
         users:
           tenants: 1
