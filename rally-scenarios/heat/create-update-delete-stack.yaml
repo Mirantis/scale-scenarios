@@ -89,4 +89,4 @@
           users_per_tenant: 3
       sla:
         failure_rate:
-          max: 0          
+          max: 0
