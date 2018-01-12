@@ -8,8 +8,9 @@
         image:
             name: "TestVM"
         floating_network: "{{ floating_net }}"
-        script: "{{ current_path }}/vm/instance_metadata.sh"
-        interpreter: "/bin/sh"
+        command:
+          interpreter: "/bin/sh"
+          script: "{{ current_path }}/vm/instance_metadata.sh"
         username: "cirros"
       runner:
         type: "constant"
