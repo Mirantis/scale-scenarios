@@ -7,12 +7,10 @@
       runner:
         type: "constant"
         times: {{ (compute * 25 )//100 if not super_light else super_light_count }}
-        concurrency: {{ (compute * 25 )//100 }}
+        concurrency: {{ (compute * 25 )//100 if not super_light else super_light_concurrency }}
       context:
         users:
-          tenants: {{ (compute * 25 )//300 }}
+          tenants: {{ (compute * 25 )//300 if not super_light else super_light_concurrency }}
           users_per_tenant: 1
-        murano_import_packages:
-          app_package: "/opt/stack/rally/rally-jobs/extra/murano/applications/ActiveDirectory/"
         roles:
           - "admin"
