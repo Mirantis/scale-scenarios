@@ -1,5 +1,5 @@
 ---
-  MuranoPackages.create_and_deploy_environment:
+  MuranoEnvironments.create_and_deploy_environment:
     -
       args:
         packages_per_env: 1
