@@ -1,5 +1,5 @@
 ---
-  NovaServers.boot_and_list_server:
+  NovaServers.boot_and_list_server_batch_all:
     -
       args:
         flavor:
