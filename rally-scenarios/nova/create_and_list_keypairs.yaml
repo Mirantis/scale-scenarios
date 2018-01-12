@@ -3,8 +3,8 @@
     -
       runner:
         type: "constant"
-        times: {{ compute }}
-        concurrency: {{ concurrency }}
+        times: {{ compute if not super_light else super_light_count }}
+        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       context:
         users:
           tenants: 2
