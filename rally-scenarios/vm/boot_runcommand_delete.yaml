@@ -13,8 +13,8 @@
         username: "cirros"
       runner:
         type: "constant"
-        times: {{ [floating_ip_amount - 5, vlan_amount - 5, 50] | sort | first }}
-        concurrency: 25
+        times: {{ [floating_ip_amount - 5, vlan_amount - 5, 50] | sort | first if not super_light else super_light_count }}
+        concurrency: {{ 25 if not super_light else super_light_concurrency }}
       context:
         users:
           tenants: 1
