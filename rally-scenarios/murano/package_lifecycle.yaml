@@ -11,5 +11,5 @@
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: {{ compute * 20 }}
+          tenants: {{ compute * 20 if not super_light else super_light_concurrency }}
           users_per_tenant: 1
