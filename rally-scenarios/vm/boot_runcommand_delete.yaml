@@ -10,7 +10,7 @@
         floating_network: "{{ floating_net }}"
         command:
           interpreter: "/bin/sh"
-          script: "{{ current_path }}/vm/instance_metadata.sh"
+          script_file: "{{ current_path }}/vm/instance_metadata.sh"
         username: "cirros"
       runner:
         type: "constant"
