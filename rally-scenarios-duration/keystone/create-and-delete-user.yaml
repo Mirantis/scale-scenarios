@@ -1,0 +1,12 @@
+---
+  KeystoneBasic.create_delete_user:
+    -
+      args:
+        name_length: 10
+      runner:
+        type: "constant_for_duration"
+        duration: {{ duration }}
+        concurrency: {{ concurrency * 2  if not super_light else super_light_concurrency }}
+      sla:
+        failure_rate:
+          max: 0
