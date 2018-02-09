@@ -16,6 +16,3 @@
       sla:
         failure_rate:
           max: 0
-
-        sleep: 5
-      runner:
