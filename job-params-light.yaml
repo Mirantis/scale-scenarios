@@ -9,4 +9,4 @@
   current_path: '/home/rally/test_config/rally-scenarios'
   floating_ip_amount: 11
   floating_net: "public"
-  duration: 600
+  duration: 30
