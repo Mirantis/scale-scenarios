@@ -10,7 +10,7 @@
             name: {{ flavor }}
         image:
             name: "TestVM"
-        volume_size: 10
+        volume_size: 2
         auto_assign_nic: true
       runner:
         type: "constant"
