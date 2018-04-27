@@ -1,8 +1,9 @@
 ---
   concurrency: 10
-  compute: 200
+  compute: 150
   gre_enabled: true
   super_light: false
   vlan_amount: 100
-  current_path: '/home/rally/listomin/mos-scenarios/rally-scenarios'
+  current_path: '/home/rally/test_config/rally-scenarios'
   floating_ip_amount: 100
+  floating_net: "public"
