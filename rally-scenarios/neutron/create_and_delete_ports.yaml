@@ -7,7 +7,7 @@
         ports_per_network: 50
       runner:
         type: "constant"
-        times: {{ vlan_amount if (not gre_enabled and compute > vlan_amount) else compute }}
+        times: {{ vlan_amount if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
         concurrency: {{ concurrency * 2 if not super_light else super_light_concurrency }}
       context:
         users:

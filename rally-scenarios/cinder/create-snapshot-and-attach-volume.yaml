@@ -5,14 +5,14 @@
         volume_type: "standard-iops"
         size:
             min: 1
-            max: 5
+            max: 2
         image:
           name: "TestVM"
         flavor:
             name: "m1.tiny"       
       runner:
         type: "constant"
-        times: {{ compute * 9 if not super_light else super_light_count }}
+        times: {{ compute * 2 if not super_light else super_light_count }}
         concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       context:
         users:

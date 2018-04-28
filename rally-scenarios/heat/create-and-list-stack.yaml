@@ -5,12 +5,12 @@
         template_path: "{{ current_path }}/heat/templates/default.yml.template"
       runner:
         type: "constant"
-        times: {{ compute }}
+        times: {{ compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 4
-          users_per_tenant: 1
+          tenants: {{ compute }}
+          users_per_tenant: 2
       sla:
         failure_rate:
           max: 0

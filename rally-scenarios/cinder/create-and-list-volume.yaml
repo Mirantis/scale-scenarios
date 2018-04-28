@@ -6,11 +6,11 @@
         detailed: True
       runner:
         type: "constant"
-        times: {{ compute * 14 if not super_light else super_light_count }}
+        times: {{ compute if not super_light else super_light_count }}
         concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       context:
         users:
-          tenants: {{ compute * 2 }}
+          tenants: {{ compute }}
           users_per_tenant: 3
         quotas:
           cinder:
@@ -32,11 +32,11 @@
           name: "TestVM"
       runner:
         type: "constant"
-        times: {{ compute * 14 if not super_light else super_light_count }}
+        times: {{ compute * 2 if not super_light else super_light_count }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: {{ compute * 2 }}
+          tenants: {{ compute }}
           users_per_tenant: 3
         quotas:
           cinder:

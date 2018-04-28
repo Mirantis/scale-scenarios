@@ -2,18 +2,18 @@
   CinderVolumes.create_and_attach_volume:
     -
       args:
-          size: {{ 10 if not super_light else 1 }}
+          size: {{ 2 if not super_light else 1 }}
           image:
             name: "TestVM"
           flavor:
             name: "m1.nano"
       runner:
         type: "constant"
-        times: {{ compute * 9 if not super_light else super_light_count }}
+        times: {{ compute * 2 if not super_light else super_light_count }}
         concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       context:
         users:
-          tenants: {{ compute * 2 }}
+          tenants: {{ compute }}
           users_per_tenant: 3
         quotas:
           cinder:

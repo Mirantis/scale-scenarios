@@ -6,12 +6,12 @@
 #         do_delete: True
 #       runner:
 #         type: "constant"
-#         times: {{ compute * 7 if not super_light else super_light_count }}
-#         concurrency: 2
+#         times: {{ compute * 2 if not super_light else super_light_count }}
+#         concurrency: {{ concurrency }}
 #       context:
 #         users:
-#           tenants: 1
-#           users_per_tenant: 1
+#           tenants: {{ compute }}
+#           users_per_tenant: 3
 #         quotas:
 #           cinder:
 #             volumes: -1

@@ -5,8 +5,8 @@
         max_quota: 1024
       runner:
         type: "constant"
-        times: {{ compute }}
-        concurrency: 1
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
       context:
         users:
           tenants: 3

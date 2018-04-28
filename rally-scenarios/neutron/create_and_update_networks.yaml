@@ -8,7 +8,7 @@
             name: "_updated"
       runner:
         type: "constant"
-        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 5 > vlan_amount) else compute * 5 }}
+        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:

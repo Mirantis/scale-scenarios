@@ -13,7 +13,7 @@
         auto_assign_nic: true
       runner:
         type: "constant"
-        times: {{ compute * 20 }}
+        times: {{ compute * 10 }}
         concurrency: {{ concurrency * 4 }}
       context:
         users:

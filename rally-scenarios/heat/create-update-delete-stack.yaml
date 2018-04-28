@@ -6,11 +6,11 @@
         updated_template_path: "{{ current_path }}/heat/templates/updated_random_strings_add.yml.template"
       runner:
         type: "constant"
-        times: {{ compute }}
+        times: {{ compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 2
+          tenants: {{ compute }}
           users_per_tenant: 3
       sla:
         failure_rate:
@@ -21,11 +21,11 @@
         updated_template_path: "{{ current_path }}/heat/templates/updated_random_strings_delete.yml.template"
       runner:
         type: "constant"
-        times: {{ compute }}
+        times: {{ compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 2
+          tenants: {{ compute }}
           users_per_tenant: 3
       sla:
         failure_rate:
@@ -36,11 +36,11 @@
         updated_template_path: "{{ current_path }}/heat/templates/updated_resource_group_increase.yml.template"
       runner:
         type: "constant"
-        times: {{ compute }}
+        times: {{ compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 2
+          tenants: {{ compute }}
           users_per_tenant: 3
       sla:
         failure_rate:
@@ -51,11 +51,11 @@
         updated_template_path: "{{ current_path }}/heat/templates/updated_autoscaling_policy_inplace.yml.template"
       runner:
         type: "constant"
-        times: {{ compute }}
+        times: {{ compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 2
+          tenants: {{ compute }}
           users_per_tenant: 3
       sla:
         failure_rate:
@@ -66,11 +66,11 @@
         updated_template_path: "{{ current_path }}/heat/templates/updated_resource_group_reduce.yml.template"
       runner:
         type: "constant"
-        times: {{ compute }}
+        times: {{ compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 2
+          tenants: {{ compute }}
           users_per_tenant: 3
       sla:
         failure_rate:
@@ -81,11 +81,11 @@
         updated_template_path: "{{ current_path }}/heat/templates/updated_random_strings_replace.yml.template"
       runner:
         type: "constant"
-        times: {{ compute }}
+        times: {{ compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 2
+          tenants: {{ compute }}
           users_per_tenant: 3
       sla:
         failure_rate:

@@ -3,11 +3,11 @@
     -
       runner:
         type: "constant"
-        times: {{ compute }}
+        times: {{ compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 2
+          tenants: {{ compute }}
           users_per_tenant: 3
         stacks:
           stacks_per_tenant: 2

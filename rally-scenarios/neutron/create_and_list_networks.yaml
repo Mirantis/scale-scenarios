@@ -5,7 +5,7 @@
         network_create_args: {}
       runner:
         type: "constant"
-        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 10 > vlan_amount) else compute * 10 }}
+        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
         concurrency: {{ concurrency }}
       context:
         users:

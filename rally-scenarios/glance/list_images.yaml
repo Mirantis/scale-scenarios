@@ -4,17 +4,17 @@
     -
       runner:
         type: "constant"
-        times: {{ compute  if not super_light else super_light_count }}
+        times: {{ compute * 2 if not super_light else super_light_count }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: {{ compute * 2 }}
+          tenants: {{ compute }}
           users_per_tenant: 3
         images:
           image_url: "http://{{http_server_with_glance_images}}/cirros-0.3.1-x86_64-disk.img"
           image_type: "qcow2"
           image_container: "bare"
-          images_per_tenant: 3
+          images_per_tenant: 1
       sla:
         failure_rate:
           max: 0
