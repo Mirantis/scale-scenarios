@@ -1,8 +1,6 @@
 ---
   KeystoneBasic.create_delete_user:
     -
-      args:
-        name_length: 10
       runner:
         type: "constant"
         times: {{ compute * 4 if not super_light else super_light_count }}
