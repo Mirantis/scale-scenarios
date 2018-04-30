@@ -16,7 +16,8 @@
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 1
+          # a lot of tenants needed because we can create only 254 VRID per tenant
+          tenants: {{ compute }}
           users_per_tenant: 1
         quotas:
           neutron:
