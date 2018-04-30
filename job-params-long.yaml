@@ -10,3 +10,4 @@
   floating_ip_amount: 11
   floating_net: "public"
   duration: 604800.0
+  flavor: "m1.nano"

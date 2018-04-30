@@ -9,7 +9,7 @@
         image:
           name: "TestVM"
         flavor:
-            name: "m1.tiny"       
+            name: {{ flavor }}
       runner:
         type: "constant"
         times: {{ compute * 2 if not super_light else super_light_count }}
@@ -27,7 +27,7 @@
           image:
             name: "TestVM"
           flavor:
-            name: "m1.tiny"
+            name: {{ flavor }}
           servers_per_tenant: 1
         api_versions:
           cinder:

@@ -1,6 +1,5 @@
 ---
   NovaServers.resize_server:
-  {% set flavor = flavor or "m1.nano" %}
   {% set gre_enabled = gre_enabled or False %}
   {% set initial_cidr = initial_cidr or "100.1.0.0/21" %}
   {% set alternative_cidr = alternative_cidr or "1.0.0.0/21" %}
@@ -11,7 +10,7 @@
         image:
             name: "TestVM"
         to_flavor:
-            name: "m1.small"
+            name: "m1.tiny"
         confirm: true
         auto_assign_nic: true
       runner:

@@ -3,7 +3,7 @@
     -
       args:
         flavor:
-            name: "m1.tiny"
+            name: {{ flavor }}
         image:
             name: "TestVM"
         boot_server_kwargs:
