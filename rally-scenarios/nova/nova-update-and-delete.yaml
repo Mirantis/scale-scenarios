@@ -5,8 +5,9 @@
         max_quota: 1024
       runner:
         type: "constant"
-        times: {{ compute * 2 }}
-        concurrency: {{ concurrency }}
+        times: {{ compute }}
+        # Don't increase concurrency for the test due to https://bugs.launchpad.net/mos/+bug/1458608
+        concurrency: 1
       context:
         users:
           tenants: 3
