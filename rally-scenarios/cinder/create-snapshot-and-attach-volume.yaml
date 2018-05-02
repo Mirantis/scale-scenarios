@@ -23,6 +23,10 @@
             volumes: -1
             gigabytes: -1
             snapshots: -1
+          nova:
+            instances: -1
+            cores: -1
+            ram: -1
         servers:
           image:
             name: "TestVM"
