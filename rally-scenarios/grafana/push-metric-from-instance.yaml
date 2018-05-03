@@ -1,0 +1,41 @@
+---
+  GrafanaMetrics.push_metric_from_instance:
+    {% set http_server_with_glance_images = http_server_with_glance_images or "172.16.44.5" %}
+    {% set flavor_name = flavor_name or "grafana_test.small" %}
+    {% set image_name = image_name or "TestVM" %}
+    -
+      args:
+        flavor:
+          name: {{ flavor_name }}
+        image:
+          name: {{ image_name }}
+        monitor_vip: {{ monitor_vip }}
+        pushgateway_port: {{ pushgateway_port or 9091 }}
+        grafana:
+          user: {{ grafana_user }}
+          password: {{ grafana_password }}
+          port: {{ grafana_port or 3000 }}
+        datasource_id: {{ datasource }}
+        retries_total: 30
+      runner:
+        type: "constant"
+        times: {{ compute }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+        flavors:
+          -
+            name: {{ flavor_name }}
+            ram: 512
+            disk: 1
+            vcpus: 1
+        images:
+          image_name: {{ image_name }}
+          image_url: http://{{ http_server_with_glance_images }}/cirros-0.3.1-x86_64-disk.img
+          disk_format: qcow2
+          container_format: bare
+      sla:
+        failure_rate:
+          max: 0
