@@ -10,3 +10,4 @@
   floating_ip_amount: 100
   floating_net: "public"
   flavor: "m1.nano"
+  http_server_with_glance_images: "infra-k8s.mcp-scale.mirantis.net:8082"
