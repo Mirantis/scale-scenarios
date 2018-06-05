@@ -11,3 +11,4 @@
   floating_net: "public"
   duration: 600.0
   flavor: "m1.nano"
+  http_server_with_glance_images: "172.17.48.165:8082"

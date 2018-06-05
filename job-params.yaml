@@ -10,3 +10,4 @@
   floating_ip_amount: 100
   floating_net: "public"
   flavor: "m1.nano"
+  http_server_with_glance_images: "172.17.48.165:8082"
