@@ -8,7 +8,6 @@
         port_update_args:
             admin_state_up: False
             device_id: "dummy_id"
-            device_owner: "dummy_owner"
             name: "_port_updated"
       runner:
         type: "constant"
