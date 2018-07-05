@@ -1,0 +1,82 @@
+---
+  Kubernetes.create_and_delete_local_persistent_volume:
+  -
+    args:
+      persistent_volume:
+        size: 1Gi
+        volume_mode: Block
+        local_path: /var/tmp
+        access_modes:
+        - ReadWriteOnce
+        node_affinity:
+          required:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - minikube
+      persistent_volume_claim:
+        size: 250Mi
+        access_modes:
+        - ReadWriteOnce
+      image: nginx
+      mount_path: /opt/check
+      sleep_time: 1
+      retries_total: 50
+    runner:
+      type: constant
+      concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+    context:
+      kubernetes.local_storageclass: {}
+      kubernetes.namespaces:
+        count: 3
+        with_serviceaccount: yes
+      kubernetes.cfg:
+        prepoll_delay: 0
+        retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+        sleep_time: 1
+    sla:
+      failure_rate:
+        max: 0
+  -
+    args:
+      persistent_volume:
+        size: 1Gi
+        volume_mode: Block
+        local_path: /var/tmp
+        access_modes:
+        - ReadWriteOnce
+        node_affinity:
+          required:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - minikube
+      persistent_volume_claim:
+        size: 250Mi
+        access_modes:
+        - ReadWriteOnce
+      image: nginx
+      mount_path: /opt/check
+      sleep_time: 1
+      retries_total: 50
+    runner:
+      type: rps
+      rps: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+    context:
+      kubernetes.local_storageclass: {}
+      kubernetes.namespaces:
+        count: 3
+        with_serviceaccount: yes
+      kubernetes.cfg:
+        prepoll_delay: 0
+        retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+        sleep_time: 1
+    sla:
+      failure_rate:
+        max: 0
