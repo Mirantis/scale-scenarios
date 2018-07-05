@@ -1,0 +1,29 @@
+---
+version: 2
+title: Create, read and delete namespace with random name
+subtasks:
+- title: Run a single workload with create/read/delete namespace
+  scenario:
+    Kubernetes.create_and_delete_namespace: {}
+  runner:
+    constant:
+      concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+  contexts:
+    kubernetes.cfg:
+      prepoll_delay: 0
+      retries_total: {{ compute * 15 if not super_light else 30 }}
+      sleep_time: 1
+- title: Run create/read/delete namespace with rps runner
+  scenario:
+    Kubernetes.create_and_delete_namespace: {}
+  runner:
+    rps:
+      rps: 2
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+      rps: {{ concurrency if not super_light else super_light_concurrency }}
+  contexts:
+    kubernetes.cfg:
+      prepoll_delay: 0
+      retries_total: {{ compute * 15 if not super_light else 30 }}
+      sleep_time: 1

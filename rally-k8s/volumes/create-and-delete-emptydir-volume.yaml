@@ -1,17 +1,18 @@
 ---
-  Kubernetes.scale_replication_controller:
+  Kubernetes.create_and_delete_emptydir_volume:
   -
     args:
       image: kubernetes/pause
-      replicas: 1
-      scale_replicas: 3
+      mount_path: /var/log
+      sleep_time: 1
+      retries_total: 40
     runner:
-      type: rps
-      rps: {{ concurrency if not super_light else super_light_concurrency }}
+      type: constant
+      concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       times: {{ compute * 5 if not super_light else super_light_count * 5 }}
     context:
       kubernetes.namespaces:
-        count: 4
+        count: 3
         with_serviceaccount: yes
       kubernetes.cfg:
         prepoll_delay: 0
@@ -23,15 +24,16 @@
   -
     args:
       image: kubernetes/pause
-      replicas: 1
-      scale_replicas: 3
+      mount_path: /var/log
+      sleep_time: 1
+      retries_total: 40
     runner:
-      type: constant
-      concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      type: rps
+      rps: {{ concurrency if not super_light else super_light_concurrency }}
       times: {{ compute * 5 if not super_light else super_light_count * 5 }}
     context:
       kubernetes.namespaces:
-        count: 4
+        count: 3
         with_serviceaccount: yes
       kubernetes.cfg:
         prepoll_delay: 0
