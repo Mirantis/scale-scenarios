@@ -1,38 +1,38 @@
 ---
 version: 2
-title: Create, read and delete replication controller with random name
+title: Create, read and delete deployment with random name
 subtasks:
-- title: Run a single workload with create/read/delete replication controller
+- title: Run a single workload with create/read/delete deployment
   scenario:
-    Kubernetes.create_delete_replication_controller:
-      replicas: 3
+    Kubernetes.create_and_delete_deployment:
       image: kubernetes/pause
+      replicas: 3
   runner:
     constant:
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       times: {{ compute * 5 if not super_light else super_light_count * 5 }}
   contexts:
     namespaces:
-      count: 4
+      count: 3
       with_serviceaccount: true
     kubernetes.cfg:
       prepoll_delay: 0
-      retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+      retries_total: {{ compute * 30 if not super_light else super_light_count * 30 }}
       sleep_time: 1
-- title: Run create/read/delete replication controller with rps runner
+- title: Run create/read/delete deployment with rps runner
   scenario:
-    Kubernetes.create_delete_replication_controller:
-      replicas: 3
+    Kubernetes.create_and_delete_deployment:
       image: kubernetes/pause
+      replicas: 3
   runner:
     rps:
       rps: {{ concurrency if not super_light else super_light_concurrency }}
       times: {{ compute * 5 if not super_light else super_light_count * 5 }}
   contexts:
     namespaces:
-      count: 4
+      count: 3
       with_serviceaccount: true
     kubernetes.cfg:
       prepoll_delay: 0
-      retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+      retries_total: {{ compute * 30 if not super_light else super_light_count * 30 }}
       sleep_time: 1
