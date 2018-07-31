@@ -56,7 +56,7 @@
       runner:
         type: "constant"
         times: {{ compute * 2 if not super_light else super_light_count }}
-        concurrency: 1
+        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       context:
         users:
           tenants: {{ compute }}

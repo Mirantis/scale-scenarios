@@ -1,0 +1,14 @@
+---
+  NovaFlavors.create_flavor:
+    -
+      args:
+        ram: 500
+        vcpus: 1
+        disk: 1
+      runner:
+        type: "constant"
+        times: {{ compute }}
+        concurrency: {{ concurrency }}
+      sla:
+        failure_rate:
+          max: 0

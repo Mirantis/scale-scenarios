@@ -1,0 +1,18 @@
+---
+  KeystoneBasic.create_and_update_user:
+    -
+      args:
+        create_user_kwargs: {}
+        update_user_kwargs:
+          enabled: false
+      runner:
+        type: "constant"
+        times: {{ compute * 8 if not super_light else super_light_count }}
+        concurrency: {{ concurrency * 4 if not super_light else super_light_concurrency }}
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0

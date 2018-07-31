@@ -11,6 +11,7 @@
         image:
             name: "TestVM"
         auto_assign_nic: true
+        block_migration: true
       runner:
         type: "constant"
         times: {{ compute }}
@@ -37,3 +38,37 @@
       sla:
         failure_rate:
           max: 0
+    #
+    # -
+    #   args:
+    #     flavor:
+    #       name: "{{flavor_name}}"
+    #     image:
+    #       name: "TestVM"
+    #     block_migration: false
+    #   runner:
+    #     type: "constant"
+    #     times: {{ compute }}
+    #     concurrency: {{ concurrency }}
+    #   context:
+    #     users:
+    #       tenants: 2
+    #       users_per_tenant: 2
+    #     quotas:
+    #       nova:
+    #         instances: -1
+    #         cores: -1
+    #         ram: -1
+    #         floating_ips: -1
+    #         security_groups: -1
+    #         security_group_rules: -1
+    #       neutron:
+    #         network: -1
+    #         subnet: -1
+    #         port: -1
+    #     network:
+    #       start_cidr: {{ initial_cidr if gre_enabled else alternative_cidr }}
+    #       networks_per_tenant: 1
+    #   sla:
+    #     failure_rate:
+    #       max: 0
