@@ -1,0 +1,19 @@
+---
+  CeilometerResource.get_tenant_resources:
+    -
+      runner:
+        type: "constant"
+        times: {{ 10 if not super_light else super_light_count }}
+        concurrency: 5
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+        ceilometer:
+          counter_name: "cpu_util"
+          counter_type: "gauge"
+          counter_volume: 1.0
+          counter_unit: "instance"
+      sla:
+        failure_rate:
+          max: 0

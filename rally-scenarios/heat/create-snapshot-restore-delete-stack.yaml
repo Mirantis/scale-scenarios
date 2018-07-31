@@ -1,0 +1,16 @@
+---
+  HeatStacks.create_snapshot_restore_delete_stack:
+    -
+      args:
+        template_path: "{{ current_path }}/heat/templates/random-strings.yaml.template"
+      runner:
+        type: "constant"
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 3
+      sla:
+        failure_rate:
+          max: 0
