@@ -1,0 +1,23 @@
+---
+  NeutronSubnets.delete_subnets:
+    -
+      runner:
+        type: "constant"
+        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 15
+          user_choice_method: "round_robin"
+        network:
+          subnets_per_network: 15
+          dualstack: true
+          router: {}
+        quotas:
+          neutron:
+            network: -1
+            subnet: -1
+      sla:
+        failure_rate:
+          max: 0

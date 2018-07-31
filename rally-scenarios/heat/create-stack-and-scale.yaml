@@ -1,0 +1,18 @@
+---
+  HeatStacks.create_stack_and_scale:
+    -
+      args:
+        template_path: "{{ current_path }}/heat/templates/autoscaling-group.yaml.template"
+        output_key: "scaling_url"
+        delta: 1
+      runner:
+        type: "constant"
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 3
+      sla:
+        failure_rate:
+          max: 0

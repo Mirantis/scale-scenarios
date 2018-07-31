@@ -1,0 +1,28 @@
+---
+  CinderVolumes.list_volumes:
+    -
+      args:
+        detailed: True
+      runner:
+        type: "constant"
+        times: {{ compute * 2 if not super_light else super_light_count }}0
+        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 1
+        quotas:
+          cinder:
+            volumes: -1
+            gigabytes: -1
+            snapshots: -1
+        api_versions:
+            cinder:
+                version: 2
+                service_name: cinderv2
+        volumes:
+          size: 1
+          volumes_per_tenant: 4
+      sla:
+        failure_rate:
+          max: 0

@@ -1,0 +1,16 @@
+---
+  NeutronNetworks.list_agents:
+    -
+      args:
+        agent_args: {}
+      runner:
+        type: "constant"
+        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
