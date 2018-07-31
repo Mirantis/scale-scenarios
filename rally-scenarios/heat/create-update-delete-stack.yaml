@@ -2,7 +2,7 @@
   HeatStacks.create_update_delete_stack:
     -
       args:
-        template_path: "{{ current_path }}/heat/templates/random_strings.yml.template"
+        template_path: "{{ current_path }}/heat/templates/random-strings.yaml.template"
         updated_template_path: "{{ current_path }}/heat/templates/updated_random_strings_add.yml.template"
       runner:
         type: "constant"
@@ -17,7 +17,7 @@
           max: 0
     -
       args:
-        template_path: "{{ current_path }}/heat/templates/random_strings.yml.template"
+        template_path: "{{ current_path }}/heat/templates/random-strings.yaml.template"
         updated_template_path: "{{ current_path }}/heat/templates/updated_random_strings_delete.yml.template"
       runner:
         type: "constant"
@@ -77,7 +77,7 @@
           max: 0
     -
       args:
-        template_path: "{{ current_path }}/heat/templates/random_strings.yml.template"
+        template_path: "{{ current_path }}/heat/templates/random-strings.yaml.template"
         updated_template_path: "{{ current_path }}/heat/templates/updated_random_strings_replace.yml.template"
       runner:
         type: "constant"

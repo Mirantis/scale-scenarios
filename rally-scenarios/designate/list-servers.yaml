@@ -1,0 +1,14 @@
+---
+  DesignateBasic.list_servers:
+    -
+      runner:
+        type: "constant"
+        times: {{ compute * 2  if not super_light else super_light_count }}
+        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0
