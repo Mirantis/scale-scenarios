@@ -1,0 +1,14 @@
+---
+  HeatStacks.list_stacks_and_events:
+    -
+      runner:
+        type: "constant"
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 3
+      sla:
+        failure_rate:
+          max: 0

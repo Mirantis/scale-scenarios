@@ -1,0 +1,14 @@
+---
+  Authenticate.keystone:
+    -
+      runner:
+        type: "constant"
+        times: {{ 10 if not super_light else super_light_count }}
+        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 50
+      sla:
+        failure_rate:
+          max: 0

@@ -1,0 +1,17 @@
+---
+  KeystoneBasic.create_and_list_roles:
+    -
+      args:
+        create_role_kwargs: {}
+        list_role_kwargs: {}
+      runner:
+        type: "constant"
+        times: {{ compute * 8 if not super_light else super_light_count }}
+        concurrency: {{ concurrency * 4 if not super_light else super_light_concurrency }}
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0

@@ -1,0 +1,19 @@
+---
+  GlanceImages.create_and_download_image:
+  {% set http_server_with_glance_images = http_server_with_glance_images or "172.16.44.5" %}
+    -
+      args:
+        image_location: "http://{{http_server_with_glance_images}}/cirros-0.4.0-x86_64-disk.img"
+        container_format: "bare"
+        disk_format: "qcow2"
+      runner:
+        type: "constant"
+        times: {{ compute * 2 if not super_light else super_light_count }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 3
+      sla:
+        failure_rate:
+          max: 0
