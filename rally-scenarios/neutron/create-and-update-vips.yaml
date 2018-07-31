@@ -1,0 +1,24 @@
+# ---
+#   NeutronLoadbalancerV1.create_and_update_vips:
+#     -
+#       args:
+#         vip_create_args: {}
+#         vip_update_args: {}
+#       runner:
+#         type: "constant"
+#         times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
+#         concurrency: {{ concurrency }}
+#       context:
+#         users:
+#           tenants: 2
+#           users_per_tenant: 2
+#         network: {}
+#         quotas:
+#           neutron:
+#             network: -1
+#             subnet: -1
+#             pool: -1
+#             vip: -1
+#       sla:
+#         failure_rate:
+#           max: 0

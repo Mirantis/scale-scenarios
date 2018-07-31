@@ -16,7 +16,7 @@
           max: 0
     -
       args:
-        template_path: "{{ current_path }}/heat/templates/server_with_volume.yml.template"
+        template_path: "{{ current_path }}/heat/templates/server-with-volume.yaml.template"
       runner:
         timeout: 90
         type: "constant"
@@ -33,3 +33,62 @@
       sla:
         failure_rate:
           max: 0
+    -
+      args:
+        template_path: "{{ current_path }}/heat/templates/server-with-volume.yaml.template"
+      runner:
+        type: "constant"
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 3
+      sla:
+        failure_rate:
+          max: 0
+    -
+      args:
+        template_path: "{{ current_path }}/heat/templates/server-with-ports.yaml.template"
+      runner:
+        type: "constant"
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 3
+      sla:
+        failure_rate:
+          max: 0
+    -
+      args:
+        template_path: "{{ current_path }}/heat/templates/resource-group-with-constraint.yaml.template"
+      runner:
+        type: "constant"
+        times: {{ compute * 2 }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 3
+      sla:
+        failure_rate:
+          max: 0
+    # -
+    #   args:
+    #     template_path: "{{ current_path }}/heat/templates/resource-group-server-with-volume.yaml.template"
+    #     parameters:
+    #        num_instances: 2
+    #     files: ["{{ current_path }}/heat/templates/server-with-volume.yaml.template"]
+    #   runner:
+    #     type: "constant"
+    #     times: {{ compute * 2 }}
+    #     concurrency: {{ concurrency }}
+    #   context:
+    #     users:
+    #       tenants: {{ compute }}
+    #       users_per_tenant: 3
+    #   sla:
+    #     failure_rate:
+    #       max: 0

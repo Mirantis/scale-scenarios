@@ -1,0 +1,33 @@
+  CinderVolumeTypes.create_and_delete_encryption_type:
+    -
+      args:
+        provider: "LuksEncryptor"
+        cipher: "aes-xts-plain64"
+        key_size: 512
+        control_location: "front-end"
+      runner:
+        type: "constant"
+        times: {{ compute * 2 if not super_light else super_light_count }}
+        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 3
+        quotas:
+          cinder:
+            volumes: -1
+            gigabytes: -1
+            snapshots: -1
+        api_versions:
+            cinder:
+                version: 2
+                service_name: cinderv2
+        volume_types: [
+          "test_type1",
+          "test_type2",
+          "test_type3",
+          "test_type4"
+        ]
+      sla:
+        failure_rate:
+          max: 0
