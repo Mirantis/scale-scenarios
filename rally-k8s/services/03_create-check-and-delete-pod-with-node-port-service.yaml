@@ -10,14 +10,16 @@ subtasks:
       protocol: TCP
   runner:
     constant:
-      concurrency: 2
-      times: 10
+      concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
   contexts:
     namespaces:
       count: 3
       with_serviceaccount: true
     kubernetes.cfg:
       prepoll_delay: 1
+      retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+      sleep_time: 1
 - title: Run create/check/delete NodePort service with rps runner
   scenario:
     Kubernetes.create_check_and_delete_pod_with_node_port_service:
@@ -26,11 +28,13 @@ subtasks:
       protocol: TCP
   runner:
     rps:
-      rps: 2
-      times: 10
+      rps: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
   contexts:
     namespaces:
       count: 3
       with_serviceaccount: true
     kubernetes.cfg:
       prepoll_delay: 1
+      retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+      sleep_time: 1
