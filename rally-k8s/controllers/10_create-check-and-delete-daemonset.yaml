@@ -6,6 +6,8 @@ subtasks:
   scenario:
     Kubernetes.create_check_and_delete_daemonset:
       image: kubernetes/pause
+      node_labels:
+        node-role.kubernetes.io/node: "true"
   runner:
     constant:
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
@@ -22,6 +24,8 @@ subtasks:
   scenario:
     Kubernetes.create_check_and_delete_daemonset:
       image: kubernetes/pause
+      node_labels:
+        node-role.kubernetes.io/node: "true"
   runner:
     rps:
       rps: {{ concurrency if not super_light else super_light_concurrency }}
