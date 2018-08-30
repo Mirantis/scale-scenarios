@@ -1,5 +1,5 @@
 ---
-  Kubernetes.create_and_delete_local_persistent_volume:
+  Kubernetes.create_and_delete_pod_with_local_persistent_volume:
   -
     args:
       persistent_volume:
@@ -12,18 +12,14 @@
           required:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                - minikube
+              - key: node-role.kubernetes.io/node
+                operator: Exists
       persistent_volume_claim:
         size: 250Mi
         access_modes:
         - ReadWriteOnce
-      image: nginx
+      image: gcr.io/google-samples/hello-go-gke:1.0
       mount_path: /opt/check
-      sleep_time: 1
-      retries_total: 50
     runner:
       type: constant
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
@@ -52,18 +48,14 @@
           required:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kubernetes.io/hostname
-                operator: In
-                values:
-                - minikube
+              - key: node-role.kubernetes.io/node
+                operator: Exists
       persistent_volume_claim:
         size: 250Mi
         access_modes:
         - ReadWriteOnce
-      image: nginx
+      image: gcr.io/google-samples/hello-go-gke:1.0
       mount_path: /opt/check
-      sleep_time: 1
-      retries_total: 50
     runner:
       type: rps
       rps: {{ concurrency if not super_light else super_light_concurrency }}

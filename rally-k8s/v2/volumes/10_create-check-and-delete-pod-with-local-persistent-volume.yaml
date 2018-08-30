@@ -1,0 +1,80 @@
+---
+version: 2
+title: Create, read, check and delete pod with local persistent volume
+subtasks:
+- title: Run a single workload with create/read/check/delete pod with local PVC
+  scenario:
+    Kubernetes.create_and_delete_pod_with_local_persistent_volume:
+      persistent_volume:
+        size: 1Gi
+        volume_mode: Block
+        local_path: /var/tmp
+        access_modes:
+        - ReadWriteOnce
+        node_affinity:
+          required:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/node
+                operator: Exists
+      persistent_volume_claim:
+        size: 250Mi
+        access_modes:
+        - ReadWriteOnce
+      image: gcr.io/google-samples/hello-go-gke:1.0
+      mount_path: /opt/check
+      check_cmd:
+      - ls
+      - /opt/check
+      error_regexp: No such file
+  runner:
+    constant:
+      concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+  contexts:
+    namespaces:
+      count: 3
+      with_serviceaccount: true
+    local_storageclass: {}
+    kubernetes.cfg:
+      prepoll_delay: 0
+      retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+      sleep_time: 1
+- title: Run create/read/check/delete pod with local PVC with rps runner
+  scenario:
+    Kubernetes.create_and_delete_pod_with_local_persistent_volume:
+      persistent_volume:
+        size: 1Gi
+        volume_mode: Block
+        local_path: /var/tmp
+        access_modes:
+        - ReadWriteOnce
+        node_affinity:
+          required:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: node-role.kubernetes.io/node
+                operator: Exists
+      persistent_volume_claim:
+        size: 250Mi
+        access_modes:
+        - ReadWriteOnce
+      image: gcr.io/google-samples/hello-go-gke:1.0
+      mount_path: /opt/check
+      check_cmd:
+      - ls
+      - /opt/check
+      error_regexp: No such file
+  runner:
+    rps:
+      rps: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+  contexts:
+    namespaces:
+      count: 3
+      with_serviceaccount: true
+    local_storageclass: {}
+    kubernetes.cfg:
+      prepoll_delay: 0
+      retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+      sleep_time: 1

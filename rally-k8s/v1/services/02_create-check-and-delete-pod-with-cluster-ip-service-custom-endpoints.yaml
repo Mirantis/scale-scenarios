@@ -1,0 +1,42 @@
+---
+  Kubernetes.create_check_and_delete_pod_with_cluster_ip_service_custom_endpoints:
+  -
+    args:
+      image: gcr.io/google-samples/hello-go-gke:1.0
+      port: 80
+      protocol: TCP
+    runner:
+      type: constant
+      concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+    context:
+      kubernetes.namespaces:
+        count: 4
+        with_serviceaccount: yes
+      kubernetes.cfg:
+        prepoll_delay: 0
+        retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+        sleep_time: 1
+    sla:
+      failure_rate:
+        max: 0
+  -
+    args:
+      image: gcr.io/google-samples/hello-go-gke:1.0
+      port: 80
+      protocol: TCP
+    runner:
+      type: rps
+      rps: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+    context:
+      kubernetes.namespaces:
+        count: 4
+        with_serviceaccount: yes
+      kubernetes.cfg:
+        prepoll_delay: 0
+        retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+        sleep_time: 1
+    sla:
+      failure_rate:
+        max: 0

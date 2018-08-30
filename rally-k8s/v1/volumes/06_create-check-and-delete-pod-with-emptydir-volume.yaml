@@ -1,5 +1,5 @@
 ---
-  Kubernetes.create_check_and_delete_hostpath_volume:
+  Kubernetes.create_and_delete_pod_with_emptydir_volume:
   -
     args:
       image: busybox
@@ -7,13 +7,9 @@
       - sleep
       - "3600"
       mount_path: /opt/check
-      volume_type: Directory
-      volume_path: /var/log/
       check_cmd:
       - ls
       - /opt/check
-      sleep_time: 1
-      retries_total: 40
     runner:
       type: constant
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
@@ -36,13 +32,9 @@
       - sleep
       - "3600"
       mount_path: /opt/check
-      volume_type: Directory
-      volume_path: /var/log/
       check_cmd:
       - ls
       - /opt/check
-      sleep_time: 1
-      retries_total: 40
     runner:
       type: rps
       rps: {{ concurrency if not super_light else super_light_concurrency }}

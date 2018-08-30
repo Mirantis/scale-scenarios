@@ -1,18 +1,17 @@
 ---
-  Kubernetes.create_and_delete_secret_volume:
+  Kubernetes.create_check_and_delete_daemonset:
   -
     args:
       image: kubernetes/pause
-      mount_path: /var/log
-      sleep_time: 1
-      retries_total: 40
+      node_labels:
+        node-role.kubernetes.io/node: "true"
     runner:
       type: constant
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       times: {{ compute * 5 if not super_light else super_light_count * 5 }}
     context:
       kubernetes.namespaces:
-        count: 3
+        count: 4
         with_serviceaccount: yes
       kubernetes.cfg:
         prepoll_delay: 0
@@ -24,16 +23,15 @@
   -
     args:
       image: kubernetes/pause
-      mount_path: /var/log
-      sleep_time: 1
-      retries_total: 40
+      node_labels:
+        node-role.kubernetes.io/node: "true"
     runner:
       type: rps
       rps: {{ concurrency if not super_light else super_light_concurrency }}
       times: {{ compute * 5 if not super_light else super_light_count * 5 }}
     context:
       kubernetes.namespaces:
-        count: 3
+        count: 4
         with_serviceaccount: yes
       kubernetes.cfg:
         prepoll_delay: 0

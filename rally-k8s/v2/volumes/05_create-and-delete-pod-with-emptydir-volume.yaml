@@ -1,0 +1,38 @@
+---
+version: 2
+title: Create, read and delete pod with emptyDir volume
+subtasks:
+- title: Run a single workload with create/read/delete pod with emptyDir volume
+  scenario:
+    Kubernetes.create_and_delete_pod_with_emptydir_volume:
+      image: kubernetes/pause
+      mount_path: /opt/check
+  runner:
+    constant:
+      concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+  contexts:
+    namespaces:
+      count: 3
+      with_serviceaccount: true
+    kubernetes.cfg:
+      prepoll_delay: 0
+      retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+      sleep_time: 1
+- title: Run create/read/delete pod with emptyDir volume with rps runner
+  scenario:
+    Kubernetes.create_and_delete_pod_with_emptydir_volume:
+      image: kubernetes/pause
+      mount_path: /opt/check
+  runner:
+    rps:
+      rps: {{ concurrency if not super_light else super_light_concurrency }}
+      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+  contexts:
+    namespaces:
+      count: 3
+      with_serviceaccount: true
+    kubernetes.cfg:
+      prepoll_delay: 0
+      retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+      sleep_time: 1
