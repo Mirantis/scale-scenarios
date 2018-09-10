@@ -37,7 +37,7 @@ subtasks:
       with_serviceaccount: true
     local_storageclass: {}
     kubernetes.cfg:
-      prepoll_delay: 0
+      prepoll_delay: 1
       retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
       sleep_time: 1
 - title: Run create/read/check/delete pod with local PVC with rps runner
@@ -75,6 +75,6 @@ subtasks:
       with_serviceaccount: true
     local_storageclass: {}
     kubernetes.cfg:
-      prepoll_delay: 0
+      prepoll_delay: 1
       retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
       sleep_time: 1

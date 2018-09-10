@@ -11,7 +11,7 @@ subtasks:
       times: {{ compute * 5 if not super_light else super_light_count * 5 }}
   contexts:
     kubernetes.cfg:
-      prepoll_delay: 0
+      prepoll_delay: 1
       retries_total: {{ compute * 15 if not super_light else 30 }}
       sleep_time: 1
 - title: Run create/read/delete namespace with rps runner
@@ -24,6 +24,6 @@ subtasks:
       rps: {{ concurrency if not super_light else super_light_concurrency }}
   contexts:
     kubernetes.cfg:
-      prepoll_delay: 0
+      prepoll_delay: 1
       retries_total: {{ compute * 15 if not super_light else 30 }}
       sleep_time: 1
