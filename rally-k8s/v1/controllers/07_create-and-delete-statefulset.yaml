@@ -1,7 +1,4 @@
 ---
-version: 2
-title: Create, read and delete statefulset with random name
-subtasks:
   Kubernetes.create_and_delete_statefulset:
   -
     args:
