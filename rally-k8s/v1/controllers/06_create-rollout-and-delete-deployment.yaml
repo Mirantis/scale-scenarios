@@ -17,14 +17,14 @@
     runner:
       type: constant
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
-      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+      times: {{ compute * 2 if not super_light else super_light_count * 2 }}
     context:
       kubernetes.namespaces:
         count: 4
         with_serviceaccount: yes
       kubernetes.cfg:
         prepoll_delay: 1
-        retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+        retries_total: {{ compute * 60 if not super_light else super_light_count * 60 }}
         sleep_time: 1
     sla:
       failure_rate:
@@ -46,14 +46,14 @@
     runner:
       type: rps
       rps: {{ concurrency if not super_light else super_light_concurrency }}
-      times: {{ compute * 5 if not super_light else super_light_count * 5 }}
+      times: {{ compute * 2 if not super_light else super_light_count * 2 }}
     context:
       kubernetes.namespaces:
         count: 4
         with_serviceaccount: yes
       kubernetes.cfg:
         prepoll_delay: 1
-        retries_total: {{ compute * 45 if not super_light else super_light_count * 45 }}
+        retries_total: {{ compute * 60 if not super_light else super_light_count * 60 }}
         sleep_time: 1
     sla:
       failure_rate:
