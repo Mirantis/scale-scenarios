@@ -14,6 +14,7 @@
       check_cmd:
       - ls
       - /var/log/check.txt
+      error_regexp: No such file
     runner:
       type: constant
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
@@ -43,6 +44,7 @@
       check_cmd:
       - ls
       - /var/log/check.txt
+      error_regexp: No such file
     runner:
       type: rps
       rps: {{ concurrency if not super_light else super_light_concurrency }}

@@ -26,12 +26,13 @@
       check_cmd:
       - ls
       - /opt/check
+      error_regexp: No such file
     runner:
       type: constant
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
       times: {{ compute * 5 if not super_light else super_light_count * 5 }}
     context:
-      kubernetes.local_storageclass: {}
+      local_storageclass: {}
       kubernetes.namespaces:
         count: 3
         with_serviceaccount: yes
@@ -68,12 +69,13 @@
       check_cmd:
       - ls
       - /opt/check
+      error_regexp: No such file
     runner:
       type: rps
       rps: {{ concurrency if not super_light else super_light_concurrency }}
       times: {{ compute * 5 if not super_light else super_light_count * 5 }}
     context:
-      kubernetes.local_storageclass: {}
+      local_storageclass: {}
       kubernetes.namespaces:
         count: 3
         with_serviceaccount: yes
