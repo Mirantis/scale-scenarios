@@ -4,7 +4,7 @@ title: Create, read and delete replication controller with random name
 subtasks:
 - title: Run a single workload with create/read/delete replication controller
   scenario:
-    Kubernetes.create_delete_replication_controller:
+    Kubernetes.create_and_delete_replication_controller:
       replicas: 3
       image: kubernetes/pause
   runner:
@@ -21,7 +21,7 @@ subtasks:
       sleep_time: 1
 - title: Run create/read/delete replication controller with rps runner
   scenario:
-    Kubernetes.create_delete_replication_controller:
+    Kubernetes.create_and_delete_replication_controller:
       replicas: 3
       image: kubernetes/pause
   runner:

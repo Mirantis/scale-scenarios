@@ -1,5 +1,5 @@
 ---
-  Kubernetes.create_delete_replication_controller:
+  Kubernetes.create_and_delete_replication_controller:
   -
     args:
       replicas: 3
