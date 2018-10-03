@@ -8,6 +8,7 @@ subtasks:
       image: gcr.io/google-samples/hello-go-gke:1.0
       port: 80
       protocol: TCP
+      request_timeout: 30
   runner:
     constant:
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
@@ -26,6 +27,7 @@ subtasks:
       image: gcr.io/google-samples/hello-go-gke:1.0
       port: 80
       protocol: TCP
+      request_timeout: 30
   runner:
     rps:
       rps: {{ concurrency if not super_light else super_light_concurrency }}
