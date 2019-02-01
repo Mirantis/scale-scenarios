@@ -3,8 +3,8 @@
     {% set flavor = flavor or "esc_test.small" %}
     {% set image = image or "TestVM" %}
     {% set elasticsearch_port = elasticsearch_port or 9200 %}
-    {% set sleep_time = sleep_time or 5 %}
-    {% set retries_total = retries_total or 30 %}
+    {% set sleep_time = sleep_time or 10 %}
+    {% set retries_total = retries_total or 60 %}
     -
       args:
         flavor:
