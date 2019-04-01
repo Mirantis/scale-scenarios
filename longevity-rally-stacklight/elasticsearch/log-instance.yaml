@@ -1,0 +1,28 @@
+---
+  ElasticsearchLogging.log_instance:
+    {% set flavor = flavor or "esc_test.small" %}
+    {% set image = image or "TestVM" %}
+    {% set elasticsearch_port = elasticsearch_port or 9200 %}
+    {% set sleep_time = sleep_time or 10 %}
+    {% set retries_total = retries_total or 60 %}
+    -
+      args:
+        flavor:
+          name: {{ flavor }}
+        image:
+          name: {{ image }}
+        logging_vip: {{ logging_vip }}
+        elasticsearch_port: {{ elasticsearch_port }}
+        sleep_time: {{ sleep_time }}
+        retries_total: {{ retries_total }}
+      runner:
+        type: "constant_for_duration"
+        duration: {{ duration }}
+        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+      context:
+        users:
+          tenants: 1
+          users_per_tenant: 1
+      sla:
+        failure_rate:
+          max: 0
