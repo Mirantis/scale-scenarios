@@ -16,12 +16,12 @@
   # grafana/elastic
   sleep_time: 5
   retries_total: 30
-  monitor_vip: 10.11.0.70
+  monitor_vip: mon
   pushgateway_port: 15012
   grafana_user: admin
   grafana_password: admin
   grafana_port: 15013
   datasource: 1
-  logging_vip: 10.11.0.60
+  logging_vip: log
   elasticsearch_port: 9200
 
