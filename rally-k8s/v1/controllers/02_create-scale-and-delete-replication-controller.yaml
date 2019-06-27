@@ -3,8 +3,8 @@
   -
     args:
       image: kubernetes/pause
-      replicas: 2
-      scale_replicas: 3
+      replicas: 1
+      scale_replicas: 2
     runner:
       type: constant
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
@@ -14,8 +14,8 @@
         count: 4
         with_serviceaccount: yes
       kubernetes.cfg:
-        prepoll_delay: 1
-        retries_total: {{ compute * 60 if not super_light else super_light_count * 60 }}
+        prepoll_delay: 3
+        retries_total: {{ concurrency * 60 if not super_light else super_light_concurrency * 60 }}
         sleep_time: 1
     sla:
       failure_rate:
@@ -23,8 +23,8 @@
   -
     args:
       image: kubernetes/pause
-      replicas: 2
-      scale_replicas: 3
+      replicas: 1
+      scale_replicas: 2
     runner:
       type: rps
       rps: {{ concurrency if not super_light else super_light_concurrency }}
@@ -34,8 +34,8 @@
         count: 4
         with_serviceaccount: yes
       kubernetes.cfg:
-        prepoll_delay: 1
-        retries_total: {{ compute * 60 if not super_light else super_light_count * 60 }}
+        prepoll_delay: 3
+        retries_total: {{ compute * 20 if not super_light else super_light_count * 20 }}
         sleep_time: 1
     sla:
       failure_rate:
