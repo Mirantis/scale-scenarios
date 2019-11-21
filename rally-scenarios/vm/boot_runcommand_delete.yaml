@@ -6,15 +6,17 @@
         flavor:
             name: {{ flavor }}
         image:
-            name: "TestVM"
+            name: {{ image }}
+        wait_for_ping: true
+        username: "cirros"
+        password: "gocubsgo"
         command:
           interpreter: "/bin/sh"
           script_file: "{{ current_path }}/vm/instance_metadata.sh"
-        username: "cirros"
       runner:
         type: "constant"
-        times: {{ [floating_ip_amount - 5, vlan_amount - 5, 50] | sort | first if not super_light else super_light_count }}
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+        times: {{ concurrency * 2 * 10 }}
+        concurrency: {{ concurrency * 2 }}
       context:
         users:
           tenants: 1
@@ -31,6 +33,7 @@
             network: -1
             subnet: -1
             port: -1
+            floatingip: -1
         network: {}
       sla:
         failure_rate:
