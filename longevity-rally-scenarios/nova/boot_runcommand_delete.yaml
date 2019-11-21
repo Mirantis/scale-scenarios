@@ -14,9 +14,9 @@
           interpreter: "/bin/sh"
           script_file: "{{ current_path }}/vm/instance_metadata.sh"
       runner:
-        type: "constant"
-        times: {{ concurrency * 2 * 10 }}
-        concurrency: {{ concurrency * 2 }}
+        type: "constant_for_duration"
+        duration: {{ duration }}
+        concurrency: {{ concurrency }}
       context:
         users:
           tenants: 1

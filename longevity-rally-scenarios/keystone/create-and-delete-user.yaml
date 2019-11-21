@@ -4,7 +4,7 @@
       runner:
         type: "constant_for_duration"
         duration: {{ duration }}
-        concurrency: {{ concurrency * 2  if not super_light else super_light_concurrency }}
+        concurrency: {{ concurrency * 2 }}
       sla:
         failure_rate:
           max: 0
