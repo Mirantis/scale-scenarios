@@ -6,10 +6,10 @@
       runner:
         type: "constant_for_duration"
         duration: {{ duration }}
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+        concurrency: {{ concurrency }}
       context:
         users:
-          tenants: {{ compute * 2 }}
+          tenants: {{ concurrency }}
           users_per_tenant: 3
         quotas:
           cinder:
@@ -18,8 +18,8 @@
             snapshots: -1
         api_versions:
           cinder:
-            version: 2
-            service_name: cinderv2
+            version: 3
+            service_name: cinderv3
       sla:
         failure_rate:
           max: 0
