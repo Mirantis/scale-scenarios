@@ -7,11 +7,11 @@
         ports_per_network: 10
       runner:
         type: "constant"
-        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
+        times: {{ compute }}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: 2
+          tenants: 20
           users_per_tenant: 2
         quotas:
           neutron:
