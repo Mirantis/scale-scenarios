@@ -1,15 +1,12 @@
 ---
   NovaServers.boot_and_delete_server:
   {% set flavor = flavor or "m1.nano" %}
-  {% set gre_enabled = gre_enabled or False %}
-  {% set initial_cidr = initial_cidr or "100.1.0.0/21" %}
-  {% set alternative_cidr = alternative_cidr or "1.0.0.0/21" %}
     -
       args:
         flavor:
             name: {{ flavor }}
         image:
-            name: "TestVM"
+            name: {{ image }}
         detailed: True
         auto_assign_nic: true
       runner:
@@ -18,8 +15,8 @@
         duration: {{ duration }}
       context:
         users:
-          tenants: {{ [floating_ip_amount - 5, vlan_amount, compute * 20] | sort | first }}
-          users_per_tenant: 2
+          tenants: 1
+          users_per_tenant: 1
         quotas:
           nova:
             instances: -1
@@ -32,9 +29,7 @@
             network: -1
             subnet: -1
             port: -1
-        network:
-          start_cidr: {{ initial_cidr if gre_enabled else alternative_cidr }}
-          networks_per_tenant: 1
+        network: {}
       sla:
         failure_rate:
           max: 0
