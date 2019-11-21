@@ -16,6 +16,7 @@
         type: "constant"
         times: {{ compute }}
         concurrency: {{ concurrency }}
+        timeout: 600
       context:
         users:
           tenants: 2
