@@ -4,13 +4,14 @@
       args:
         image:
           name: "TestVM"
+        boot_server_kwargs:
+          auto_assign_nic: true
         metadata:
           test_metadata: "true"
         availability_zone: "nova"
         ram: 512
         vcpus: 1
         disk: 1
-        boot_server_kwargs: {}
       runner:
         type: "constant"
         times: {{ compute }}
@@ -19,6 +20,8 @@
         users:
           tenants: 3
           users_per_tenant: 2
+        network:
+          networks_per_tenant: 1
       sla:
         failure_rate:
           max: 0
