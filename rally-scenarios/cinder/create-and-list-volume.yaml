@@ -2,41 +2,15 @@
   CinderVolumes.create_and_list_volume:
     -
       args:
-        size: 1
+        size: 50
         detailed: True
       runner:
         type: "constant"
-        times: {{ compute if not super_light else super_light_count }}
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
-      context:
-        users:
-          tenants: {{ compute }}
-          users_per_tenant: 3
-        quotas:
-          cinder:
-            volumes: -1
-            gigabytes: -1
-            snapshots: -1
-        api_versions:
-          cinder:
-            version: 2
-            service_name: cinderv2
-      sla:
-        failure_rate:
-          max: 0
-    -
-      args:
-        size: 1
-        detailed: True
-        image:
-          name: "TestVM"
-      runner:
-        type: "constant"
-        times: {{ compute * 2 if not super_light else super_light_count }}
+        times: {{ compute}}
         concurrency: {{ concurrency }}
       context:
         users:
-          tenants: {{ compute }}
+          tenants: 20
           users_per_tenant: 3
         quotas:
           cinder:
@@ -46,7 +20,7 @@
         api_versions:
           cinder:
             version: 2
-            service_name: cinderv2
+            service_name: cinderv3
       sla:
         failure_rate:
           max: 0
