@@ -4,16 +4,18 @@
       args:
           size: {{ 2 if not super_light else 1 }}
           image:
-            name: "TestVM"
+            name: {{ image }}
           flavor:
             name: {{ flavor }}
+          type: {{ volume_type }}
+          auto_assign_nic: true
       runner:
         type: "constant"
-        times: {{ compute * 2 if not super_light else super_light_count }}
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+        times: {{ concurrency * 2 * 10 }}
+        concurrency: {{ concurrency * 2 }}
       context:
         users:
-          tenants: {{ compute }}
+          tenants: {{ concurrency }}
           users_per_tenant: 3
         quotas:
           cinder:
