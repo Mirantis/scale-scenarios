@@ -10,6 +10,8 @@
             name: "TestVM"
           flavor:
               name: "m1.tiny"
+          create_vm_params:
+            auto_assign_nic: true
       runner:
         type: "constant"
         times: {{ compute * 4 if not super_light else super_light_count }}
@@ -18,21 +20,17 @@
         users:
           tenants: 2
           users_per_tenant: 1
+        network:
+          networks_per_tenant: 1
         quotas:
           cinder:
             volumes: -1
             gigabytes: -1
             snapshots: -1
-        servers:
-          image:
-            name: "TestVM"
-          flavor:
-            name: "m1.tiny"
-          servers_per_tenant: 2
         api_versions:
           cinder:
-            version: 2
-            service_name: cinderv2
+            version: 3
+            service_name: cinderv3
       sla:
         failure_rate:
           max: 0
