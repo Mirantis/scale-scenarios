@@ -2,6 +2,9 @@
 {% set volume_type = volume_type or "" %}
 ---
   NovaServers.boot_server_from_volume:
+  {% set gre_enabled = gre_enabled or False %}
+  {% set initial_cidr = initial_cidr or "100.1.0.0/22" %}
+  {% set alternative_cidr = alternative_cidr or "1.0.0.0/22" %}
     -
       args:
         flavor:
@@ -10,6 +13,7 @@
             name: "TestVM"
         volume_size: 10
         volume_type: "{{volume_type}}"
+        auto_assign_nic: true
       runner:
         type: "constant"
         times: {{ compute }}
@@ -18,6 +22,9 @@
         users:
           tenants: 3
           users_per_tenant: 2
+        network:
+          start_cidr: {{ initial_cidr if gre_enabled else alternative_cidr }}
+          networks_per_tenant: 1
       sla:
         failure_rate:
           max: 0
