@@ -7,6 +7,7 @@
             name: "{{flavor_name}}"
         image:
             name: "TestVM"
+        auto_assign_nic: true
       runner:
         type: "constant"
         times: {{ compute }}
