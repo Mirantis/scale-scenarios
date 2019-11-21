@@ -4,6 +4,8 @@
       args:
         image:
           name: "TestVM"
+        create_vm_params:
+          auto_assign_nic: true
         metadata:
           test_metadata: "true"
         availability_zone: "nova"
@@ -19,6 +21,8 @@
         users:
           tenants: 3
           users_per_tenant: 2
+        network:
+          networks_per_tenant: 1
       sla:
         failure_rate:
           max: 0
