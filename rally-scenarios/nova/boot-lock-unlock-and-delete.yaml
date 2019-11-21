@@ -7,6 +7,8 @@
             name: "{{flavor_name}}"
         image:
             name: "TestVM"
+        boot_server_kwargs:
+            auto_assign_nic: true
       runner:
         type: "constant"
         times: {{ compute }}
