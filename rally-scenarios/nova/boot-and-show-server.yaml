@@ -8,6 +8,7 @@
             name: "{{flavor_name}}"
         image:
             name: "{{image_name}}"
+        auto_assign_nic: true
       runner:
         type: "constant"
         times: {{ compute }}
@@ -16,6 +17,20 @@
         users:
           tenants: 1
           users_per_tenant: 1
+        network:
+          networks_per_tenant: 1
+        quotas:
+          nova:
+            instances: -1
+            cores: -1
+            ram: -1
+            floating_ips: -1
+            security_groups: -1
+            security_group_rules: -1
+          neutron:
+            network: -1
+            subnet: -1
+            port: -1
       sla:
         failure_rate:
           max: 0
