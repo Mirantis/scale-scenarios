@@ -1,8 +1,6 @@
 ---
   DesignateBasic.list_recordsets:
     -
-      args:
-        zone_id: <uuid>
       runner:
         type: "constant"
         times: {{ compute * 2  if not super_light else super_light_count }}
@@ -11,6 +9,9 @@
         users:
           tenants: 2
           users_per_tenant: 2
+        api_versions:
+            designate:
+                version: 2
       sla:
         failure_rate:
           max: 0
