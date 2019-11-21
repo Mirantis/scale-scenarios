@@ -9,7 +9,8 @@
             name: {{ flavor }}
         image:
             name: "TestVM"
-        auto_assign_nic: true
+        boot_server_kwargs:
+          auto_assign_nic: true
         actions:
           -
             hard_reboot: 1
