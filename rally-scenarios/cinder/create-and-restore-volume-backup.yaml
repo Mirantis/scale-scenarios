@@ -1,26 +1,26 @@
-# ---
-#   CinderVolumes.create_and_restore_volume_backup:
-#     -
-#       args:
-#         size: 1
-#         do_delete: True
-#       runner:
-#         type: "constant"
-#         times: {{ compute * 2 if not super_light else super_light_count }}
-#         concurrency: {{ concurrency }}
-#       context:
-#         users:
-#           tenants: {{ compute }}
-#           users_per_tenant: 3
-#         quotas:
-#           cinder:
-#             volumes: -1
-#             gigabytes: -1
-#             snapshots: -1
-#         api_versions:
-#           cinder:
-#             version: 2
-#             service_name: cinderv2
-#       sla:
-#         failure_rate:
-#           max: 0
+---
+  CinderVolumes.create_and_restore_volume_backup:
+    -
+      args:
+        size: 1
+        do_delete: True
+      runner:
+        type: "constant"
+        times: {{ compute * 2 if not super_light else super_light_count }}
+        concurrency: {{ concurrency }}
+      context:
+        users:
+          tenants: {{ compute }}
+          users_per_tenant: 3
+        quotas:
+          cinder:
+            volumes: -1
+            gigabytes: -1
+            snapshots: -1
+        api_versions:
+          cinder:
+            version: 3
+            service_name: cinderv3
+      sla:
+        failure_rate:
+          max: 0

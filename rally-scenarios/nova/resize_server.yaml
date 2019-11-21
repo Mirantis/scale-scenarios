@@ -10,7 +10,7 @@
         image:
             name: "TestVM"
         to_flavor:
-            name: "m1.tiny"
+            name: "m1.small"
         confirm: true
         auto_assign_nic: true
       runner:
