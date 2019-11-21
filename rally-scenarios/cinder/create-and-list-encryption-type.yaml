@@ -23,10 +23,10 @@
                 version: 2
                 service_name: cinderv2
         volume_types: [
-          "test_type1",
-          "test_type2",
-          "test_type3",
-          "test_type4"
+        {% for i in range(0, compute | int ) %}
+          "test_type_{{ i }}",
+        {% endfor %}
+          "test_type_{{ compute }}"
         ]
       sla:
         failure_rate:
