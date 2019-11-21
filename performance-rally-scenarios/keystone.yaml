@@ -2,13 +2,13 @@
   Authenticate.keystone:
     -
       runner:
-        type: "constant"
+        type: "rps"
         times: {{ concurrency * 4 * 1000 }}
-        concurrency: {{ concurrency * 4 }}
+        rps: {{ concurrency * 4 }}
       context:
         users:
-          tenants: 3
-          users_per_tenant: 50
+          tenants: 10
+          users_per_tenant: 10
       sla:
         failure_rate:
           max: 0
