@@ -7,6 +7,7 @@
             name: "TestVM"
           flavor:
             name: {{ flavor }}
+          type: "volumes-hdd"
       runner:
         type: "constant"
         times: {{ compute * 2 if not super_light else super_light_count }}
@@ -22,8 +23,8 @@
             snapshots: -1
         api_versions:
             cinder:
-                version: 2
-                service_name: cinderv2
+                version: 3
+                service_name: cinderv3
       sla:
         failure_rate:
           max: 0
