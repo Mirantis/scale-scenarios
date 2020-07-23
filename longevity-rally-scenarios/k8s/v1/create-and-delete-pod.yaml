@@ -1,0 +1,20 @@
+---
+  Kubernetes.create_and_delete_pod:
+  -
+    args:
+      image: kubernetes/pause
+    runner:
+      type: constant_for_duration
+      concurrency: {{ concurrency }}
+      duration: {{ duration }}
+    context:
+      kubernetes.namespaces:
+        count: 3
+        with_serviceaccount: yes
+      kubernetes.cfg:
+        prepoll_delay: 1
+        retries_total: {{ concurrency * 60 if not super_light else super_light_concurrency * 60 }}
+        sleep_time: 1
+    sla:
+      failure_rate:
+        max: 0
