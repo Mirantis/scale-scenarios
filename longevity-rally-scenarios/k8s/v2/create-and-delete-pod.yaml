@@ -1,0 +1,18 @@
+---
+version: 2
+- title: Run longevity test constantly creating/deleting bare pods with duration runner
+  scenario:
+    Kubernetes.create_and_delete_pod:
+      image: kubernetes/pause
+  runner:
+    constant_for_duration:
+      concurrency: {{ concurrency }}
+      duration: {{ duration }}
+  contexts:
+    namespaces:
+      count: 3
+      with_serviceaccount: true
+    kubernetes.cfg:
+      prepoll_delay: 1
+      retries_total: {{ compute * 30 if not super_light else super_light_count * 30 }}
+      sleep_time: 1
