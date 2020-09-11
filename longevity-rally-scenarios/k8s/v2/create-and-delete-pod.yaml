@@ -1,0 +1,16 @@
+---
+version: 2
+title: Run k8s longevity testing
+subtasks:
+- title: Run a single workload with create/read/delete pod for a week
+  scenario:
+    Kubernetes.create_and_delete_pod:
+      image: kubernetes/pause
+  runner:
+    constant_for_duration:
+      concurrency: {{ concurrency }}
+      duration: {{ duration }}
+  contexts:
+    namespaces:
+      count: 3
+      with_serviceaccount: true

@@ -1,0 +1,16 @@
+---
+version: 2
+title: Create, read and delete pod with random name
+subtasks:
+- title: Run create/read/delete pod with rps runner
+  scenario:
+    Kubernetes.create_and_delete_pod:
+      image: kubernetes/pause
+  runner:
+    rps:
+      rps: 40
+      times: 12500
+  contexts:
+    namespaces:
+      count: 3
+      with_serviceaccount: true
