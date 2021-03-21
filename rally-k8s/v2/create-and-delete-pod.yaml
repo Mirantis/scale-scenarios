@@ -14,10 +14,6 @@ subtasks:
     namespaces:
       count: 3
       with_serviceaccount: true
-    kubernetes.cfg:
-      prepoll_delay: 1
-      retries_total: {{ compute * 30 if not super_light else super_light_count * 30 }}
-      sleep_time: 1
 - title: Run create/read/delete pod with rps runner
   scenario:
     Kubernetes.create_and_delete_pod:
@@ -30,7 +26,3 @@ subtasks:
     namespaces:
       count: 3
       with_serviceaccount: true
-    kubernetes.cfg:
-      prepoll_delay: 1
-      retries_total: {{ compute * 30 if not super_light else super_light_count * 30 }}
-      sleep_time: 1
