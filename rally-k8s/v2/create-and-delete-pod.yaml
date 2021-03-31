@@ -14,6 +14,7 @@ subtasks:
     namespaces:
       count: 3
       with_serviceaccount: true
+      serviceaccount_delay: 5
 - title: Run create/read/delete pod with rps runner
   scenario:
     Kubernetes.create_and_delete_pod:
@@ -26,3 +27,4 @@ subtasks:
     namespaces:
       count: 3
       with_serviceaccount: true
+      serviceaccount_delay: 5
