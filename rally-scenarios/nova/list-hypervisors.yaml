@@ -5,8 +5,8 @@
         detailed: True
       runner:
         type: "constant"
-        times: 10
-        concurrency: 2
+        times: {{ load * 4 }}
+        concurrency: {{ load }}
       sla:
         failure_rate:
           max: 0

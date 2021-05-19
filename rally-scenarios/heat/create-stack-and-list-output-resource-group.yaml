@@ -5,11 +5,11 @@
         template_path: "{{ current_path }}/heat/templates/resource-group-with-outputs.yaml.template"
       runner:
         type: "constant"
-        times: {{ compute * 2 }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 2 * times_multiplier_stack }}
+        concurrency: {{ load * 2 }}
       context:
         users:
-          tenants: {{ compute }}
+          tenants: {{ load }}
           users_per_tenant: 3
       sla:
         failure_rate:
@@ -21,11 +21,11 @@
         template_path: "{{ current_path }}/heat/templates/resource-group-with-outputs.yaml.template"
       runner:
         type: "constant"
-        times: 5
-        concurrency: 2
+        times: {{ load * 2 * times_multiplier_stack }}
+        concurrency: {{ load * 2 }}
       context:
         users:
-          tenants: 2
+          tenants: {{ load }}
           users_per_tenant: 2
       sla:
         failure_rate:

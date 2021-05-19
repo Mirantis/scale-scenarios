@@ -5,13 +5,13 @@
         max_quota: 1024
       runner:
         type: "constant"
-        times: {{ compute }}
-        # Don't increase concurrency for the test due to https://bugs.launchpad.net/mos/+bug/1458608
-        concurrency: 1
+        times: {{ load * 4 * times_multiplier_quota }}
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 3
           users_per_tenant: 2
+
       sla:
         failure_rate:
           max: 0

@@ -5,8 +5,8 @@
         repetitions: 2
       runner:
         type: "constant"
-        times: {{ 10 if not super_light else super_light_count }}
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+        times: {{ load * 4 * times_multiplier_authenticate }}
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 3
