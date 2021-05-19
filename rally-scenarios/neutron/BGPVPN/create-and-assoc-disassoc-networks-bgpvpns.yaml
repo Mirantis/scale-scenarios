@@ -5,8 +5,8 @@
       args: {}
       runner:
         type: "constant"
-        times: 10
-        concurrency: 2
+        times: {{ load * 5 * times_multiplier_bgpvpn }}
+        concurrency: {{ load * 5 }}
       context:
         users:
           tenants: 2

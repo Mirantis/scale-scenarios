@@ -3,15 +3,15 @@
     -
       args:
         size:
-          min: {{ 2 if not super_light else 1 }}
-          max: {{ 5 if not super_light else 2 }}
+          min: 1
+          max: 5
       runner:
         type: "constant"
-        times: {{ concurrency * 10 if not super_light else super_light_count }}
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+        times: {{ load * 5 * times_multiplier_volume }}
+        concurrency: {{ load * 5 }}
       context:
         users:
-          tenants: 10
+          tenants: {{ load }}
           users_per_tenant: 3
         quotas:
           cinder:

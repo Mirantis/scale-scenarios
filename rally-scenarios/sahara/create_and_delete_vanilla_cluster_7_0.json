@@ -5,16 +5,16 @@
                 "flavor": {
                     "name": "m1.medium"
                 },
-                "workers_count": {{ compute * 2 }},
+                "workers_count": {{ load * 2 }},
                 "plugin_name": "vanilla",
                 "hadoop_version": "2.6.0",
                 "auto_security_group": true
             },
             "runner": {
                 "type": "constant",
-                "times": 1,
+                "times": {{ load * 4 * times_multiplier_sahara }},
                 "timeout": 3600,
-                "concurrency": 1
+                "concurrency": {{ load * 4 }}
             },
             "context": {
                 "users": {
