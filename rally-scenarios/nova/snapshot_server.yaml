@@ -13,7 +13,7 @@
       runner:
         type: "constant"
         times: {{ compute * 2 if not super_light else super_light_count }}
-        concurrency: {{ concurrency }}
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 2

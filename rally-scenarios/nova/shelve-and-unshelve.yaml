@@ -12,7 +12,7 @@
       runner:
         type: "constant"
         times: 10
-        concurrency: 2
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 3
