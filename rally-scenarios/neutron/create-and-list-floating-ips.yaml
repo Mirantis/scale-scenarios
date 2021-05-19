@@ -6,8 +6,8 @@
         floating_ip_args: {}
       runner:
         type: "constant"
-        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_floating_ip }}
+        concurrency: {{ load * 5 }}
       context:
         users:
           tenants: 2

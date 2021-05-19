@@ -13,8 +13,8 @@
         username: "cirros"
       runner:
         type: "constant"
-        times: 10
-        concurrency: 2
+        times: {{ load * times_multiplier_server }}
+        concurrency: {{ load }}
       context:
         users:
           tenants: 3

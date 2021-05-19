@@ -14,8 +14,8 @@
             auto_assign_nic: true
       runner:
         type: "constant"
-        times: {{ compute * 4 if not super_light else super_light_count }}
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+        times: {{ load * 5 * times_multiplier_volume }}
+        concurrency: {{ load * 5 }}
       context:
         users:
           tenants: 2
@@ -23,6 +23,15 @@
         network:
           networks_per_tenant: 1
         quotas:
+          nova:
+            instances: -1
+            cores: -1
+            ram: -1
+            floating_ips: -1
+            security_groups: -1
+            security_group_rules: -1
+            server-groups: -1
+            server-group-members: -1
           cinder:
             volumes: -1
             gigabytes: -1
