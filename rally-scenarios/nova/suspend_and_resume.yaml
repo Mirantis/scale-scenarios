@@ -13,8 +13,8 @@
         auto_assign_nic: true
       runner:
         type: "constant"
-        times: {{ compute * 2 }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 4 * times_multiplier_server }}
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 3

@@ -3,8 +3,8 @@
     -
       runner:
         type: "constant"
-        times: 10
-        concurrency: 2
+        times: {{ load * 10 }}
+        concurrency: {{ load }}
       sla:
         failure_rate:
           max: 0

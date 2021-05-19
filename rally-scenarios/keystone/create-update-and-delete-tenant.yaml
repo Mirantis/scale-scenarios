@@ -4,8 +4,8 @@
       args: {}
       runner:
         type: "constant"
-        times: {{ compute * 8 if not super_light else super_light_count }}
-        concurrency: {{ concurrency * 4 if not super_light else super_light_concurrency }}
+        times: {{ load * 4 * times_multiplier_project }}
+        concurrency: {{ load * 4 }}
       sla:
         failure_rate:
           max: 0

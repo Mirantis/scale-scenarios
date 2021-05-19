@@ -5,12 +5,30 @@
         all_projects: false
       runner:
         type: "constant"
-        times: {{ compute }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 4 * times_multiplier_server_group }}
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 2
           users_per_tenant: 2
+        quotas:
+          nova:
+            instances: -1
+            cores: -1
+            ram: -1
+            floating_ips: -1
+            security_groups: -1
+            security_group_rules: -1
+            server-groups: -1
+            server-group-members: -1
+          neutron:
+            network: -1
+            subnet: -1
+            port: -1
+          cinder:
+            volumes: -1
+            gigabytes: -1
+            snapshots: -1
       sla:
         failure_rate:
           max: 0

@@ -5,11 +5,11 @@
         detailed: True
       runner:
         type: "constant"
-        times: {{ compute * 2 if not super_light else super_light_count }}0
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+        times: {{ load * 4 }}
+        concurrency: {{ load }}
       context:
         users:
-          tenants: {{ compute }}
+          tenants: {{ load }}
           users_per_tenant: 1
         quotas:
           cinder:

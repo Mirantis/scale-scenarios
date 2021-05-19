@@ -2,7 +2,7 @@
   CinderVolumes.create_and_attach_volume:
     -
       args:
-          size: {{ 2 if not super_light else 1 }}
+          size: 1
           image:
             name: {{ image }}
           flavor:
@@ -13,12 +13,12 @@
             auto_assign_nic: true
       runner:
         type: "constant"
-        times: {{ concurrency * 2 * 10 }}
-        concurrency: {{ concurrency * 2 }}
+        times: {{ load * 5 * times_multiplier_volume }}
+        concurrency: {{ load * 5 }}
         timeout: 600
       context:
         users:
-          tenants: {{ concurrency }}
+          tenants: {{ load }}
           users_per_tenant: 3
         network:
           networks_per_tenant: 1

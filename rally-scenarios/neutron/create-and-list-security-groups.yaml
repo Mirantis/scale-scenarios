@@ -5,8 +5,8 @@
         security_group_create_args: {}
       runner:
         type: "constant"
-        times: {{ compute * 2 if not super_light else super_light_count }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_security_group }}
+        concurrency: {{ load * 5 }}
       context:
         users:
           tenants: 10

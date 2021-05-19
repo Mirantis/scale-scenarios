@@ -6,11 +6,11 @@
         output_key: "val1"
       runner:
         type: "constant"
-        times: {{ compute * 2 }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 2 * times_multiplier_stack }}
+        concurrency: {{ load * 2 }}
       context:
         users:
-          tenants: {{ compute }}
+          tenants: {{ load }}
           users_per_tenant: 3
       sla:
         failure_rate:
@@ -23,11 +23,11 @@
         output_key: "val1"
       runner:
         type: "constant"
-        times: {{ compute * 2 }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 2 * times_multiplier_stack }}
+        concurrency: {{ load * 2 }}
       context:
         users:
-          tenants: {{ compute }}
+          tenants: {{ load }}
           users_per_tenant: 3
       sla:
         failure_rate:
