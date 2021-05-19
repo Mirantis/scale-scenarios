@@ -12,8 +12,8 @@
         auto_assign_nic: true
       runner:
         type: "constant"
-        times: {{ compute * 2 if not super_light else super_light_count }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_server }}
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 2

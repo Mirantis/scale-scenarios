@@ -7,8 +7,8 @@
         ports_per_network: 10
       runner:
         type: "constant"
-        times: {{ compute }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_port }}
+        concurrency: {{ load * 5 }}
       context:
         users:
           tenants: 20

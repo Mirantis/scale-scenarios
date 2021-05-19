@@ -5,7 +5,7 @@
       runner:
         type: "constant"
         times: {{ compute }}
-        concurrency: {{ concurrency }}
+        concurrency: {{ load * 4 }}
       args:
         ram: 500
         vcpus : 1
