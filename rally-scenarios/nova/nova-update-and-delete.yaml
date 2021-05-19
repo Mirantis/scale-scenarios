@@ -7,7 +7,7 @@
         type: "constant"
         times: {{ compute }}
         # Don't increase concurrency for the test due to https://bugs.launchpad.net/mos/+bug/1458608
-        concurrency: 1
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 3

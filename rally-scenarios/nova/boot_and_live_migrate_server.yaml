@@ -14,8 +14,8 @@
         block_migration: true
       runner:
         type: "constant"
-        times: {{ compute }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_server }}
+        concurrency: {{ load * 4 }}
         timeout: 600
       context:
         users:
@@ -49,8 +49,8 @@
         block_migration: false
       runner:
         type: "constant"
-        times: {{ compute }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_server }}
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 2

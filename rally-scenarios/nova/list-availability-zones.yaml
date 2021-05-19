@@ -6,7 +6,7 @@
       runner:
         type: "constant"
         times: {{ compute }}
-        concurrency: {{ concurrency }}
+        concurrency: {{ load * 4 }}
       sla:
         failure_rate:
           max: 0

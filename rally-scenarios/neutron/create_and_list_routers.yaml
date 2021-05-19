@@ -9,8 +9,8 @@
         router_create_args: {}
       runner:
         type: "constant"
-        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_router }}
+        concurrency: {{ load * 5 }}
       context:
         users:
           # a lot of tenants needed because we can create only 254 VRID per tenant

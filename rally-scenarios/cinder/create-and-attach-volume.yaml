@@ -13,8 +13,8 @@
             auto_assign_nic: true
       runner:
         type: "constant"
-        times: {{ concurrency * 2 * 10 }}
-        concurrency: {{ concurrency * 2 }}
+        times: {{ load * 5 * times_multiplier_volume }}
+        concurrency: {{ load * 5 }}
         timeout: 600
       context:
         users:

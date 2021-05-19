@@ -14,8 +14,8 @@
         auto_assign_nic: true
       runner:
         type: constant
-        times: {{ compute * 2 }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_server }}
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: {{ [floating_ip_amount - 10 , vlan_amount, compute * 20] | sort | first }}
