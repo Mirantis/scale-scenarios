@@ -3,8 +3,8 @@
     -
       runner:
         type: "constant"
-        times: {{ compute }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 4 }}
+        concurrency: {{ load }}
       sla:
         failure_rate:
           max: 0

@@ -14,8 +14,8 @@
         disk: 1
       runner:
         type: "constant"
-        times: {{ compute }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 4 * times_multiplier_server }}
+        concurrency: {{ load * 4 }}
       context:
         users:
           tenants: 3

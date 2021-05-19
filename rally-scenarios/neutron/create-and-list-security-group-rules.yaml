@@ -6,8 +6,8 @@
         security_group_rule_args: {}
       runner:
         type: "constant"
-        times: {{ vlan_amount - 10 if (not gre_enabled and compute * 2 > vlan_amount) else compute * 2 }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_security_group }}
+        concurrency: {{ load * 5 }}
       context:
         users:
           tenants: 2
