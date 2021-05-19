@@ -5,8 +5,8 @@
         size: 1
       runner:
         type: "constant"
-        times: {{ compute * 2 if not super_light else super_light_count }}
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+        times: {{ load * 5 * times_multiplier_volume }}
+        concurrency: {{ load * 5 }}
       context:
         users:
           tenants: {{ compute }}
@@ -31,8 +31,8 @@
         nested_level: 3
       runner:
         type: "constant"
-        times: {{ compute * 2 if not super_light else super_light_count }}
-        concurrency: {{ concurrency if not super_light else super_light_concurrency }}
+        times: {{ load * 5 * times_multiplier_volume }}
+        concurrency: {{ load * 5 }}
       context:
         users:
           tenants: {{ compute }}

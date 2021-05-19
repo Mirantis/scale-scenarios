@@ -17,8 +17,8 @@
           auto_assign_nic: true
       runner:
         type: "constant"
-        times: {{ compute if not super_light else super_light_count }}
-        concurrency: {{ concurrency }}
+        times: {{ load * 5 * times_multiplier_volume }}
+        concurrency: {{ load * 5 }}
         timeout: 600
       context:
         users:
