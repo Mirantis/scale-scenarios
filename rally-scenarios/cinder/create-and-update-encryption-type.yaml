@@ -12,7 +12,7 @@
       runner:
         type: "constant"
         times: {{ load * 5 * times_multiplier_volume }}
-        concurrency: {{ load * 5 }}
+        concurrency: {{ load * 5  }}
       context:
         users:
           tenants: {{ load }}
@@ -27,10 +27,10 @@
                 version: 3
                 service_name: cinderv3
         volume_types: [
-        {% for i in range(0,  load * 5 * times_multiplier_volume  | int * 2 if not super_light else super_light_count ) %}
+        {% for i in range(0,  load * 5 * times_multiplier_volume ) %}
           "test_type_{{ i }}",
         {% endfor %}
-          "test_type_{{ load * 5 * times_multiplier_volume  | int * 2 if not super_light else super_light_count }}"
+          "test_type_{{ load  * 5 * times_multiplier_volume  }}"
         ]
       sla:
         failure_rate:

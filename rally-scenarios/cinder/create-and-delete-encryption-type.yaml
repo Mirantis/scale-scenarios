@@ -23,10 +23,11 @@
                 version: 3
                 service_name: cinderv3
         volume_types: [
-          "test_type1",
-          "test_type2",
-          "test_type3",
-          "test_type4"
+        {% for i in range(0,  load * 5 * times_multiplier_volume ) %}
+          "test_type_{{ i }}",
+        {% endfor %}
+          "test_type_{{ load  * 5 * times_multiplier_volume  }}"
+        ]
         ]
       sla:
         failure_rate:

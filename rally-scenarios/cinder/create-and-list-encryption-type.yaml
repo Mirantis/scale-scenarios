@@ -23,10 +23,10 @@
                 version: 3
                 service_name: cinderv3
         volume_types: [
-        {% for i in range(0,  load | int * 2 if not super_light else super_light_count ) %}
+        {% for i in range(0,  load * 5 * times_multiplier_volume ) %}
           "test_type_{{ i }}",
         {% endfor %}
-          "test_type_{{ load | int * 2 if not super_light else super_light_count }}"
+          "test_type_{{ load  * 5 * times_multiplier_volume  }}"
         ]
       sla:
         failure_rate:
