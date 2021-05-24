@@ -17,7 +17,7 @@
           tenants: 2
           users_per_tenant: 2
         network:
-          start_cidr: "100.1.0.0/26"
+          start_cidr: "100.1.0.0/16"
         quotas:
           nova:
             instances: -1
