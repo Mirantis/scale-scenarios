@@ -12,7 +12,7 @@
           users_per_tenant: 2
         quotas:
           nova:
-            keypairs: -1
+            key_pairs: -1
       sla:
         failure_rate:
           max: 0

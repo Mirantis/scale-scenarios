@@ -24,8 +24,8 @@
             floating_ips: -1
             security_groups: -1
             security_group_rules: -1
-            server-groups: -1
-            server-group-members: -1
+            server_groups: -1
+            server_group_members: -1
           neutron:
             network: -1
             subnet: -1
