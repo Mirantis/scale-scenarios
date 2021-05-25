@@ -6,7 +6,7 @@
       runner:
         type: "constant"
         times: {{ load * 4 * times_multiplier_aggregate }}
-        concurrency: {{ load * 4 }}
+        concurrency: {{ load * 4 if ( load * 4 < compute ) else compute - 1 }}
       context:
         users:
           tenants: 3
