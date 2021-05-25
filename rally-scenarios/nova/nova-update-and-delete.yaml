@@ -9,7 +9,7 @@
         concurrency: {{ load * 4 }}
       context:
         users:
-          tenants: 3
+          tenants: {{ load * 4 * 2}}
           users_per_tenant: 2
       sla:
         failure_rate:
