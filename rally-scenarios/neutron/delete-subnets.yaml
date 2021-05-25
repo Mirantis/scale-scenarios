@@ -8,10 +8,10 @@
       context:
         users:
           tenants: 1
-          users_per_tenant: 15
+          users_per_tenant: {{ load * 5 }}
           user_choice_method: "round_robin"
         network:
-          subnets_per_network: 15
+          subnets_per_network: {{ load * 5 }}
           dualstack: true
           router: {}
         quotas:
