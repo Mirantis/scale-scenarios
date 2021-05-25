@@ -1,3 +1,4 @@
+{% set flavor_name = flavor_name or "m1.tiny" %}
 ---
   NovaAggregates.create_aggregate_add_and_remove_host:
     -
@@ -5,8 +6,8 @@
         availability_zone: "nova"
       runner:
         type: "constant"
-        times: {{ load * 4 * times_multiplier_aggregate }}
-        concurrency: {{ load * 4 }}
+        times: {{load*4*times_multiplier_aggregate if (load*4 < compute/2) else (compute/2*times_multiplier_aggregate)|round|int}}
+        concurrency: {{load*4 if (load*4 < compute/2) else (compute/2)|round|int}}
       context:
         users:
           tenants: 3
