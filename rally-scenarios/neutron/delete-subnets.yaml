@@ -7,11 +7,11 @@
         concurrency: {{ load * 5 }}
       context:
         users:
-          tenants: 1
-          users_per_tenant: 15
+          tenants: {{ load * 5 }}
+          users_per_tenant: {{ times_multiplier_subnet }}
           user_choice_method: "round_robin"
         network:
-          subnets_per_network: 15
+          subnets_per_network: {{ times_multiplier_subnet }}
           dualstack: true
           router: {}
         quotas:
