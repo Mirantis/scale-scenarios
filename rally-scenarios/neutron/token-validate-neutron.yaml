@@ -2,7 +2,7 @@
   Authenticate.validate_neutron:
     -
       args:
-        repetitions: 2
+        repetitions: 1
       runner:
         type: "constant"
         times: {{ load * 2 * times_multiplier_authenticate }}
