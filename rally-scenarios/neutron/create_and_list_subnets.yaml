@@ -8,8 +8,8 @@
         subnets_per_network: 10
       runner:
         type: "constant"
-        times: {{ load * 5 * times_multiplier_subnet }}
-        concurrency: {{ load * 5 }}
+        times: {{ load * 2 * times_multiplier_subnet }}
+        concurrency: {{ load * 2 }}
       context:
         users:
           tenants: 2

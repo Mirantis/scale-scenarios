@@ -10,8 +10,8 @@
         # vip_qos_policy_id:
       runner:
         type: "constant"
-        times: {{ load * 4 * times_multiplier_loadbalancer }}
-        concurrency: {{ load * 4 }}
+        times: {{ load * 2 * times_multiplier_loadbalancer }}
+        concurrency: {{ load * 2 }}
       context:
         users:
           tenants: 2
