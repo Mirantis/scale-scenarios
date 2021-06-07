@@ -1,4 +1,4 @@
-{% set flavor_name = flavor_name or "m1.nano" %}
+{% set flavor = flavor or "m1.nano" %}
 ---
   NovaServers.list_servers:
     -
@@ -14,7 +14,7 @@
           users_per_tenant: 1
         servers:
           flavor:
-              name: "{{flavor_name}}"
+              name: "{{flavor}}"
           image:
               name: "TestVM"
           auto_assign_nic: true

@@ -1,11 +1,11 @@
-{% set flavor_name = flavor_name or "m1.nano" %}
+{% set flavor = flavor or "m1.nano" %}
 {% set image_name = "^(cirros.*-disk|TestVM)$" %}
 ---
   NovaServers.boot_server_and_attach_interface:
     -
       args:
         flavor:
-            name: "{{flavor_name}}"
+            name: "{{flavor}}"
         image:
             name: "{{image_name}}"
         network_create_args: {}

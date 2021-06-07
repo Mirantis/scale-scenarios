@@ -43,7 +43,7 @@
     -
       args:
         flavor:
-          name: "{{flavor_name}}"
+          name: "{{flavor}}"
         image:
           name: "TestVM"
         block_migration: false

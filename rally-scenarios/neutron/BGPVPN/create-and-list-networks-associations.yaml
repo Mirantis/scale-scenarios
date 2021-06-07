@@ -1,4 +1,4 @@
-{% set flavor_name = flavor_name or "m1.tiny" %}
+{% set flavor = flavor or "m1.tiny" %}
 ---
   NeutronBGPVPN.create_and_list_networks_associations:
     -
@@ -20,7 +20,7 @@
           servers_per_tenant: 1
           auto_assign_nic: True
           flavor:
-            name: "{{flavor_name}}"
+            name: "{{flavor}}"
           image:
             name: "TestVM"
       sla:

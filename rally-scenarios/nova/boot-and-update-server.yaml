@@ -1,10 +1,10 @@
-{% set flavor_name = flavor_name or "m1.nano" %}
+{% set flavor = flavor or "m1.nano" %}
 ---
   NovaServers.boot_and_update_server:
     -
       args:
         flavor:
-            name: "{{flavor_name}}"
+            name: "{{flavor}}"
         image:
             name: "TestVM"
         auto_assign_nic: true
