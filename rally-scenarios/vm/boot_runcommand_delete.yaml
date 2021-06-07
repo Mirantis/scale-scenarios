@@ -1,6 +1,6 @@
 ---
   VMTasks.boot_runcommand_delete:
-  {% set flavor = flavor or "m1.nano" %}
+  {% set flavor = flavor or "m1.tiny" %}
     -
       args:
         flavor:

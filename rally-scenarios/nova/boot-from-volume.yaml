@@ -1,4 +1,4 @@
-{% set flavor = flavor or "m1.nano" %}
+{% set flavor = flavor or "m1.tiny" %}
 {% set volume_type = volume_type or "" %}
 ---
   NovaServers.boot_server_from_volume:

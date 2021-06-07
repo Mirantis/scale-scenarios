@@ -1,4 +1,4 @@
-{% set flavor = flavor or "m1.nano" %}
+{% set flavor = flavor or "m1.tiny" %}
 ---
   NovaServers.boot_and_get_console_url:
     -

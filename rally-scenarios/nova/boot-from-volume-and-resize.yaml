@@ -1,4 +1,4 @@
-{% set flavor = flavor or "m1.nano" %}
+{% set flavor = flavor or "m1.tiny" %}
 ---
   NovaServers.boot_server_from_volume_and_resize:
     -

@@ -1,6 +1,6 @@
 ---
   GlanceImages.create_image_and_boot_instances:
-  {% set flavor = flavor or "m1.nano" %}
+  {% set flavor = flavor or "m1.tiny" %}
   {% set http_server_with_glance_images = http_server_with_glance_images or "172.16.44.5" %}
   {% set gre_enabled = gre_enabled or False %}
   {% set initial_cidr = initial_cidr or "100.1.0.0/22" %}

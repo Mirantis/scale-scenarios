@@ -1,4 +1,4 @@
-{% set flavor = flavor or "m1.nano" %}
+{% set flavor = flavor or "m1.tiny" %}
 ---
   NovaServers.shelve_and_unshelve_server:
     -
