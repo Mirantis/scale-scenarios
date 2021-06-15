@@ -14,3 +14,4 @@ subtasks:
     namespaces:
       count: 3
       with_serviceaccount: true
+      serviceaccount_delay: 5

@@ -16,6 +16,7 @@ subtasks:
     namespaces:
       count: 4
       with_serviceaccount: true
+      serviceaccount_delay: 5
     kubernetes.cfg:
       prepoll_delay: 1
       retries_total: {{ compute * 60 if not super_light else super_light_count * 60 }}
@@ -34,6 +35,7 @@ subtasks:
     namespaces:
       count: 4
       with_serviceaccount: true
+      serviceaccount_delay: 5
     kubernetes.cfg:
       prepoll_delay: 1
       retries_total: {{ compute * 60 if not super_light else super_light_count * 60 }}

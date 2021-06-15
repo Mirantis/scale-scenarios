@@ -7,7 +7,7 @@ subtasks:
     Kubernetes.create_and_delete_pod_with_local_persistent_volume:
       persistent_volume:
         size: 1Gi
-        volume_mode: Block
+        volume_mode: Filesystem
         local_path: /var/tmp
         access_modes:
         - ReadWriteOnce
@@ -15,10 +15,14 @@ subtasks:
           required:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/node
+              - key: kubernetes.io/os
                 operator: Exists
+              - key: stacklight
+                operator: NotIn
+                values:
+                - enabled
       persistent_volume_claim:
-        size: 250Mi
+        size: 1Gi
         access_modes:
         - ReadWriteOnce
       image: gcr.io/google-samples/hello-go-gke:1.0
@@ -31,6 +35,7 @@ subtasks:
     namespaces:
       count: 3
       with_serviceaccount: true
+      serviceaccount_delay: 5
     local_storageclass: {}
     kubernetes.cfg:
       prepoll_delay: 1
@@ -41,7 +46,7 @@ subtasks:
     Kubernetes.create_and_delete_pod_with_local_persistent_volume:
       persistent_volume:
         size: 1Gi
-        volume_mode: Block
+        volume_mode: Filesystem
         local_path: /var/tmp
         access_modes:
         - ReadWriteOnce
@@ -49,8 +54,12 @@ subtasks:
           required:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: node-role.kubernetes.io/node
+              - key: kubernetes.io/os
                 operator: Exists
+              - key: stacklight
+                operator: NotIn
+                values:
+                - enabled
       persistent_volume_claim:
         size: 250Mi
         access_modes:
@@ -65,6 +74,7 @@ subtasks:
     namespaces:
       count: 3
       with_serviceaccount: true
+      serviceaccount_delay: 5
     local_storageclass: {}
     kubernetes.cfg:
       prepoll_delay: 1
