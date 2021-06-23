@@ -1,12 +1,13 @@
 ---
   NeutronNetworks.create_and_delete_networks:
+    {% for i in range(10, 100, 10) %}
     -
       args:
         network_create_args: {}
       runner:
         type: "constant"
         times: {{ load * 5 * times_multiplier_network }}
-        concurrency: {{ load * 5 }}
+        concurrency: {{ i }}
       context:
         users:
           tenants: 2
@@ -17,3 +18,4 @@
       sla:
         failure_rate:
           max: 0
+  {% endfor %}
