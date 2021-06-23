@@ -6,7 +6,7 @@
       runner:
         type: "constant_for_duration"
         duration: {{ duration }}
-        concurrency: {{ concurrency }}
+        concurrency: {{i}}
       context:
         users:
           tenants: 2

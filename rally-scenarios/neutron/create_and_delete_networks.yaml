@@ -1,5 +1,6 @@
 ---
   NeutronNetworks.create_and_delete_networks:
+    {% for i in range(10, 100, 10) %}
     -
       args:
         network_create_args: {}
@@ -17,3 +18,4 @@
       sla:
         failure_rate:
           max: 0
+  {% endfor %}
