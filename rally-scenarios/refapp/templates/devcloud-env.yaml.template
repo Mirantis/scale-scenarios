@@ -1,0 +1,6 @@
+# NOTE(pas-ha) while defaults in the top.yaml are targeting typical
+# default values set by openstack-controller, this file sets the values
+# as applicable to Mirantis devclouds
+parameters:
+  database_image: bionic-server-cloudimg-amd64-20200605
+  database_flavor: tempest.small
