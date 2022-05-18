@@ -10,7 +10,7 @@
         HeatStacks.create_and_delete_stack:
           template_path: "{{ current_path }}/refapp/templates/top.yaml.template"
           files:
-            - /var/lib/rally/data/rally-scenarios/rally-scenarios/refapp/templates/scripts/service_boot.sh
+            - "{{ current_path }}/refapp/templates/scripts/service_boot.sh"
       runner:
         constant:
           times: {{ load * 2 * times_multiplier_stack }}
