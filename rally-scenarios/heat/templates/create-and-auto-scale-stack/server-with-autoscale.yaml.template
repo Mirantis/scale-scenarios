@@ -1,0 +1,140 @@
+heat_template_version: 2016-10-14
+parameters:
+  image:
+    type: string
+    default: 'Ubuntu-18.04'
+  flavor:
+    type: string
+    default: m1.tiny_test
+  network:
+    type: string
+    default: public
+  key_name:
+    type: string
+  cidr:
+    type: string
+    default: 11.11.11.0/24
+  cpuload_script:
+    type: string
+
+resources:
+
+  private_net:
+    type: OS::Neutron::Net
+
+  private_subnet:
+    type: OS::Neutron::Subnet
+    properties:
+      network_id: { get_resource: private_net }
+      cidr: { get_param: cidr }
+
+  router:
+    type: OS::Neutron::Router
+    properties:
+      external_gateway_info:
+        network: public
+
+  router_interface:
+    type: OS::Neutron::RouterInterface
+    properties:
+      router_id: { get_resource: router }
+      subnet_id: { get_resource: private_subnet }
+
+  auto_scaling_group:
+    type: OS::Heat::AutoScalingGroup
+    properties:
+      min_size: 1
+      max_size: 3
+      cooldown: 180
+      resource:
+        type: OS::TestStack
+        properties:
+          flavor: { get_param: flavor }
+          image: { get_param: image }
+          key_name: { get_param: key_name }
+          network: { get_resource: private_net }
+          cpuload_script: { get_param: cpuload_script }
+          stack_id: { get_param: "OS::stack_id" }
+
+  web_server_scaleup_policy:
+    type: OS::Heat::ScalingPolicy
+    properties:
+      adjustment_type: change_in_capacity
+      auto_scaling_group_id: {get_resource: auto_scaling_group}
+      cooldown: 60
+      scaling_adjustment: 1
+
+  web_server_scaledown_policy:
+    type: OS::Heat::ScalingPolicy
+    properties:
+      adjustment_type: change_in_capacity
+      auto_scaling_group_id: {get_resource: auto_scaling_group}
+      cooldown: 60
+      scaling_adjustment: -1
+
+  cpu_alarm_high:
+    type: OS::Aodh::GnocchiAggregationByResourcesAlarm
+    properties:
+      description: Scale up if CPU > 80%
+      metric: cpu
+      aggregation_method: rate:mean
+      granularity: 60
+      evaluation_periods: 1 # test
+      threshold: 48000000000 # cpu time ns per period [80/100×60×1×10^9] (percent / 100 * time sec * cores * 10^9)
+      resource_type: instance
+      comparison_operator: gt
+      alarm_actions:
+        - str_replace:
+            template: trust+url
+            params:
+              url: {get_attr: [web_server_scaleup_policy, signal_url]}
+      query:
+        str_replace:
+          template: '{"=": {"server_group": "stack_id"}}'
+          params:
+            stack_id: { get_param: "OS::stack_id" }
+
+  cpu_alarm_low:
+    type: OS::Aodh::GnocchiAggregationByResourcesAlarm
+    properties:
+      description: Scale down if CPU < 15% for 5 minutes
+      metric: cpu
+      aggregation_method: rate:mean
+      granularity: 60
+      evaluation_periods: 1 # test
+      threshold: 9000000000 # cpu time ns per period [15/100×60×1×10^9] (percent / 100 * time sec * cores * 10^9)
+      resource_type: instance
+      comparison_operator: lt
+      alarm_actions:
+        - str_replace:
+            template: trust+url
+            params:
+              url: {get_attr: [web_server_scaledown_policy, signal_url]}
+      query:
+        str_replace:
+          template: '{"=": {"server_group": "stack_id"}}'
+          params:
+            stack_id: { get_param: "OS::stack_id" }
+
+outputs:
+  scale_up_url:
+    value: {get_attr: [web_server_scaleup_policy, alarm_url]}
+
+  scale_dn_url:
+    value: {get_attr: [web_server_scaledown_policy, alarm_url]}
+
+  gnocchi_query_0:
+    value:
+      str_replace:
+        template: >
+          openstack metric aggregates --resource-type=instance '( / (* (/ (metric cpu rate:mean) 60) 100) 1000000000 )' server_group=stack_id
+        params:
+          stack_id: { get_param: "OS::stack_id" }
+
+  gnocchi_query_1:
+    value:
+      str_replace:
+        template: >
+          openstack metric measures aggregation --resource-type instance --query 'server_group="stack_id"' --granularity 60 --aggregation rate:mean -m cpu
+        params:
+          stack_id: { get_param: "OS::stack_id" }
