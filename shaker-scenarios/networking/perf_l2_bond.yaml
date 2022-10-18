@@ -12,23 +12,23 @@ deployment:
 execution:
   tests:
   -
-    title: Ping
-    class: flent
-    method: ping
-    time: 10
-    sla:
-    - "[type == 'agent'] >> (stats.ping_icmp.avg < 2.0)"
-  -
-    title: TCP
+    title: TCP_iperf3
     class: iperf3
+    threads: 4
     sla:
     - "[type == 'agent'] >> (stats.bandwidth.avg > 5000)"
     - "[type == 'agent'] >> (stats.retransmits.max < 10)"
   -
-    title: UDP
-    class: iperf3
-    udp: on
-    bandwidth: 0
-    datagram_size: 32
+    title: TCP_iperf
+    class: iperf
+    threads: 4
     sla:
-    - "[type == 'agent'] >> (stats.packets.avg > 100000)"
+    - "[type == 'agent'] >> (stats.bandwidth.avg > 5000)"
+    - "[type == 'agent'] >> (stats.retransmits.max < 10)"
+  -
+    title: TCP_iperf_graph
+    class: iperf_graph
+    threads: 4
+    sla:
+    - "[type == 'agent'] >> (stats.bandwidth.avg > 5000)"
+    - "[type == 'agent'] >> (stats.retransmits.max < 10)"
