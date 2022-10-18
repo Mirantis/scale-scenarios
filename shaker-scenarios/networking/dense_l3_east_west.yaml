@@ -1,24 +1,26 @@
+title: OpenStack L3 East-West Dense
+
 description:
-  This scenario launches pairs of VMs in different networks connected to one
-  router (L3 east-west)
+  In this scenario Shaker launches pairs of instances on the same compute node.
+  Instances are connected to different tenant networks connected to one
+  router. The traffic goes from one network to the other (L3 east-west).
 
 deployment:
   template: l3_east_west.hot
   accommodation: [pair, double_room, density: 8, compute_nodes: 1]
 
 execution:
-  progression: quadratic
+  progression: linear
   tests:
   -
-    title: Iperf TCP
-    class: iperf_graph
-    time: 60
-    buffer_size: 8k
-  -
-    title: TCP download
+    title: Download
     class: flent
     method: tcp_download
   -
-    title: TCP bi-directional
+    title: Upload
+    class: flent
+    method: tcp_upload
+  -
+    title: Bi-directional
     class: flent
     method: tcp_bidirectional
