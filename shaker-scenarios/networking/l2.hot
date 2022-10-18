@@ -1,8 +1,9 @@
 heat_template_version: 2013-05-23
 
 description:
-  HOT template creates a new neutron network, a router to the external
-  network and plugs servers into this new network.
+  This Heat template creates a new Neutron network, a router to the external
+  network and plugs instances into this new network. All instances are located
+  in the same L2 domain.
 
 parameters:
   image:
@@ -17,6 +18,9 @@ parameters:
   server_endpoint:
     type: string
     description: Server endpoint address
+  dns_nameservers:
+    type: comma_delimited_list
+    description: DNS nameservers for the subnet
 
 resources:
   private_net:
@@ -29,7 +33,7 @@ resources:
     properties:
       network_id: { get_resource: private_net }
       cidr: 10.0.0.0/16
-      dns_nameservers: [ 8.8.8.8, 8.8.4.4 ]
+      dns_nameservers: { get_param: dns_nameservers }
 
   router:
     type: OS::Neutron::Router
@@ -66,7 +70,7 @@ resources:
       name: {{ agent.id }}
       image: { get_param: image }
       flavor: { get_param: flavor }
-      availability_zone: "nova:{{ agent.node }}"
+      availability_zone: "{{ agent.availability_zone }}"
       networks:
         - port: { get_resource: {{ agent.id }}_port }
       user_data_format: RAW
@@ -74,7 +78,7 @@ resources:
         str_replace:
           template: |
             #!/bin/sh
-            screen -dmS shaker-agent-screen shaker-agent --server-endpoint=$SERVER_ENDPOINT --agent-id=$AGENT_ID
+            screen -dmS shaker-agent-screen shaker-agent --server-endpoint=$SERVER_ENDPOINT --agent-id=$AGENT_ID --agent-socket-recv-timeout=100 --agent-socket-send-timeout=100
           params:
             "$SERVER_ENDPOINT": { get_param: server_endpoint }
             "$AGENT_ID": {{ agent.id }}
@@ -85,7 +89,7 @@ resources:
       network_id: { get_resource: private_net }
       fixed_ips:
         - subnet_id: { get_resource: private_subnet }
-      security_groups: [{ get_resource: server_security_group }, default]
+      security_groups: [{ get_resource: server_security_group }]
 
 {% endfor %}
 
