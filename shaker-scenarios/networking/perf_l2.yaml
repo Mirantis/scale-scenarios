@@ -1,6 +1,9 @@
+title: OpenStack L2 Performance
+
 description:
-  This scenario launches 1 pair of VMs in the same private network on different
-  compute nodes.
+  In this scenario Shaker launches 1 pair of instances in the same tenant
+  network. Each instance is hosted on a separate compute node. The traffic goes
+  within the tenant network (L2 domain).
 
 deployment:
   template: l2.hot
@@ -9,18 +12,22 @@ deployment:
 execution:
   tests:
   -
-    title: Iperf TCP
-    class: iperf_graph
-    buffer_size: 8k
-    sla:
-    - "[type == 'agent'] >> (stats.bandwidth.min > 1000)"
-    - "[type == 'agent'] >> (stats.bandwidth.mean > 2000)"
+    title: Download
+    class: flent
+    method: tcp_2down.conf
   -
-    title: Iperf UDP
-    class: iperf_graph
-    udp: 1
-    bandwidth: 1000M
-    buffer_size: 1450
+    title: Upload
+    class: flent
+    method: tcp_2up.conf
+  -
+    title: Bi-directional
+    class: flent
+    method: tcp_bidirectional
+  -
+    title: UDP
+    class: iperf3
+    udp: on
+    bandwidth: 0
+    datagram_size: 32
     sla:
-    - "[type == 'agent'] >> (stats.bandwidth.min > 1000)"
-    - "[type == 'agent'] >> (stats.bandwidth.mean > 2000)"
+    - "[type == 'agent'] >> (stats.packets.avg > 100000)"
