@@ -7,17 +7,10 @@ description:
 
 deployment:
   template: l2.hot
-  accommodation: [pair, single_room, compute_nodes: 2]
+  accommodation: [pair, single_room, compute_nodes: 2, density: 4]
 
 execution:
   tests:
-  -
-    title: Ping
-    class: flent
-    method: ping
-    time: 10
-    sla:
-    - "[type == 'agent'] >> (stats.ping_icmp.avg < 2.0)"
   -
     title: TCP
     class: iperf3
@@ -25,10 +18,14 @@ execution:
     - "[type == 'agent'] >> (stats.bandwidth.avg > 5000)"
     - "[type == 'agent'] >> (stats.retransmits.max < 10)"
   -
-    title: UDP
-    class: iperf3
-    udp: on
-    bandwidth: 0
-    datagram_size: 32
-    sla:
-    - "[type == 'agent'] >> (stats.packets.avg > 100000)"
+    title: Download
+    class: flent
+    method: tcp_download
+  -
+    title: Upload
+    class: flent
+    method: tcp_upload
+  -
+    title: Bi-directional
+    class: flent
+    method: tcp_bidirectional
