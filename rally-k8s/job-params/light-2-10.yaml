@@ -1,0 +1,8 @@
+---
+  # kubernetes
+  concurrency: 2
+  compute: 10
+  super_light: true
+  super_light_count: 10
+  super_light_concurrency: 2
+
