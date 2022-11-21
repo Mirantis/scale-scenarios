@@ -5,7 +5,7 @@ subtasks:
 - title: Run a single workload with create/rollout/delete deployment
   scenario:
     Kubernetes.create_rollout_and_delete_deployment:
-      image: busybox
+      image: mirantis.azurecr.io/general/external/docker.io/library/busybox:1.32.0
       replicas: 3
       command:
       - sleep
@@ -33,7 +33,7 @@ subtasks:
 - title: Run create/rollout/delete deployment with rps runner
   scenario:
     Kubernetes.create_rollout_and_delete_deployment:
-      image: busybox
+      image: mirantis.azurecr.io/general/external/docker.io/library/busybox:1.32.0
       replicas: 3
       command:
       - sleep

@@ -5,7 +5,7 @@ subtasks:
 - title: Run a single workload with create/read/delete job
   scenario:
     Kubernetes.create_and_delete_job:
-      image: busybox
+      image: mirantis.azurecr.io/general/external/docker.io/library/busybox:1.32.0
       command:
       - echo
       - "SUCCESS"
@@ -25,7 +25,7 @@ subtasks:
 - title: Run create/read/delete job with rps runner
   scenario:
     Kubernetes.create_and_delete_job:
-      image: busybox
+      image: mirantis.azurecr.io/general/external/docker.io/library/busybox:1.32.0
       command:
       - echo
       - "SUCCESS"

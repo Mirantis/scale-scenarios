@@ -5,7 +5,7 @@ subtasks:
 - title: Run a single workload with create/scale/delete replication controller
   scenario:
     Kubernetes.create_scale_and_delete_replication_controller:
-      image: kubernetes/pause
+      image: mirantis.azurecr.io/lcm/docker/ucp-pause:3.5.4
       replicas: 2
       scale_replicas: 3
   runner:
@@ -24,7 +24,7 @@ subtasks:
 - title: Run create/scale/delete replication controller with rps runner
   scenario:
     Kubernetes.create_scale_and_delete_replication_controller:
-      image: kubernetes/pause
+      image: mirantis.azurecr.io/lcm/docker/ucp-pause:3.5.4
       replicas: 2
       scale_replicas: 3
   runner:

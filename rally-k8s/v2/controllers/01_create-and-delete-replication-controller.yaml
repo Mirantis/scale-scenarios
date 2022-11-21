@@ -6,7 +6,7 @@ subtasks:
   scenario:
     Kubernetes.create_and_delete_replication_controller:
       replicas: 3
-      image: kubernetes/pause
+      image: mirantis.azurecr.io/lcm/docker/ucp-pause:3.5.4
   runner:
     constant:
       concurrency: {{ concurrency if not super_light else super_light_concurrency }}
@@ -24,7 +24,7 @@ subtasks:
   scenario:
     Kubernetes.create_and_delete_replication_controller:
       replicas: 3
-      image: kubernetes/pause
+      image: mirantis.azurecr.io/lcm/docker/ucp-pause:3.5.4
   runner:
     rps:
       rps: {{ concurrency if not super_light else super_light_concurrency }}

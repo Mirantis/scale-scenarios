@@ -5,7 +5,7 @@ subtasks:
 - title: Run a single workload with create/read/check/delete pod with hostPath volume
   scenario:
     Kubernetes.create_and_delete_pod_with_hostpath_volume:
-      image: busybox
+      image: mirantis.azurecr.io/general/external/docker.io/library/busybox:1.32.0
       command:
       - sleep
       - "3600"
@@ -32,7 +32,7 @@ subtasks:
 - title: Run create/read/check/delete pod with hostPath volume with rps runner
   scenario:
     Kubernetes.create_and_delete_pod_with_hostpath_volume:
-      image: busybox
+      image: mirantis.azurecr.io/general/external/docker.io/library/busybox:1.32.0
       command:
       - sleep
       - "3600"

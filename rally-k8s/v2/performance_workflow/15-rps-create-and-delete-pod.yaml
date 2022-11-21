@@ -5,7 +5,7 @@ subtasks:
 - title: Run create/read/delete pod with rps runner
   scenario:
     Kubernetes.create_and_delete_pod:
-      image: kubernetes/pause
+      image: mirantis.azurecr.io/lcm/docker/ucp-pause:3.5.4
   runner:
     rps:
       rps: 15

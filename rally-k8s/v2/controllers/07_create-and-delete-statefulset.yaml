@@ -5,7 +5,7 @@ subtasks:
 - title: Run a single workload with create/read/delete statefulset
   scenario:
     Kubernetes.create_and_delete_statefulset:
-      image: kubernetes/pause
+      image: mirantis.azurecr.io/lcm/docker/ucp-pause:3.5.4
       replicas: 2
   runner:
     constant:
@@ -23,7 +23,7 @@ subtasks:
 - title: Run create/read/delete statefulset with rps runner
   scenario:
     Kubernetes.create_and_delete_statefulset:
-      image: kubernetes/pause
+      image: mirantis.azurecr.io/lcm/docker/ucp-pause:3.5.4
       replicas: 2
   runner:
     rps:
