@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e4c552f_45dc29d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1012879
+      },
+      "writtenOn": "2022-11-28T20:33:13Z",
+      "side": 1,
+      "message": "Do we really need to specify a version of the images?\nIf so, does it make sense to define a variable for that?",
+      "revId": "4d3ba5ab3f3c4246e285ad189743214dede601fa",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}
