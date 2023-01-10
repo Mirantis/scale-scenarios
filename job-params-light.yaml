@@ -14,6 +14,9 @@
   flavor: "m1.nano"
   http_server_with_glance_images: "scale-team-infra.vm.mirantis.net:8082"
 
+  image_pause: "mirantis.azurecr.io/lcm/docker/ucp-pause:3.5.5"
+  image_busybox: "mirantis.azurecr.io/general/external/docker.io/library/busybox:1.32.0"
+
   # grafana/elastic
   sleep_time: 5
   retries_total: 30

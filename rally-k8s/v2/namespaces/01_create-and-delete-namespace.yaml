@@ -19,7 +19,6 @@ subtasks:
     Kubernetes.create_and_delete_namespace: {}
   runner:
     rps:
-      rps: 2
       times: {{ compute * 2 if not super_light else super_light_count * 2 }}
       rps: {{ concurrency if not super_light else super_light_concurrency }}
   contexts:
