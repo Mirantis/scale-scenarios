@@ -1,0 +1,9 @@
+---
+  # kubernetes
+  concurrency: 10
+  compute: 100
+  super_light: false
+
+  image_pause: "mirantis.azurecr.io/lcm/docker/ucp-pause:3.5.5"
+  image_busybox: "mirantis.azurecr.io/general/external/docker.io/library/busybox:1.32.0"
+
