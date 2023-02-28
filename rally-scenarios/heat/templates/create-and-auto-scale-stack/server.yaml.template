@@ -1,0 +1,100 @@
+heat_template_version: 2016-10-14
+parameters:
+  image:
+    type: string
+  flavor:
+    type: string
+  network:
+    type: string
+  stack_id:
+    type: string
+  key_name:
+    type: string
+  root_password:
+    type: string
+    default: "qwe_123"
+  cpuload_script:
+    type: string
+
+resources:
+  root_config:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        ssh_pwauth: true
+        disable_root: false
+        chpasswd:
+          list:
+            str_replace:
+              template: "root:PASSWORD"
+              params:
+                PASSWORD: { get_param: root_password }
+          expire: False
+
+  script_cpuload:
+    type: OS::Heat::CloudConfig
+    properties:
+      cloud_config:
+        write_files:
+          - path: /bin/cpuload
+            owner: root:root
+            permissions: '0777'
+            content: { get_file: { get_param: cpuload_script } }
+
+  server_configs:
+    type: OS::Heat::MultipartMime
+    properties:
+      parts:
+        - config: { get_resource: root_config }
+        - config: { get_resource: script_cpuload }
+
+  port_security_group:
+    type: OS::Neutron::SecurityGroup
+    properties:
+      name: default_port_security_group
+      rules:
+        - direction: ingress
+          ethertype: IPv4
+          remote_ip_prefix: 0.0.0.0/0
+        - direction: ingress
+          ethertype: IPv6
+          remote_ip_prefix: ::/0
+        - direction: egress
+          ethertype: IPv6
+          remote_ip_prefix: ::/0
+        - direction: egress
+          ethertype: IPv4
+          remote_ip_prefix: 0.0.0.0/0
+
+  server_port:
+    type: OS::Neutron::Port
+    properties:
+      network_id: { get_param: network }
+      security_groups:
+        - { get_resource: port_security_group }
+
+  floating_ip:
+    type: OS::Neutron::FloatingIP
+    properties:
+      floating_network: public
+      port_id: { get_resource: server_port }
+
+  server:
+    type: OS::Nova::Server
+    properties:
+      key_name: { get_param: key_name }
+      config_drive: true
+      image: { get_param: image }
+      flavor: { get_param: flavor }
+      networks:
+        - { port: { get_resource: server_port } }
+      metadata: { "metering.server_group": { get_param: stack_id } }
+      user_data_format: SOFTWARE_CONFIG
+      user_data: { get_resource: server_configs }
+
+outputs:
+  server_ip:
+    value: { get_attr: [server, first_address] }
+
+  floating_ip:
+    value: { get_attr: [ floating_ip, floating_ip_address ] }
