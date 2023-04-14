@@ -1,0 +1,29 @@
+---
+version: 2
+title: Create, read and delete pod with configMap volume
+subtasks:
+- title: Run create/read/delete pod with configMap volume with rps runner
+  scenario:
+    Kubernetes.create_and_delete_pod_with_configmap_volume:
+      image: {{ image_busybox }}
+      command:
+      - "sleep"
+      - "3600"
+      mount_path: /var/log/check.txt
+      subpath: check.txt
+      configmap_data:
+        check.txt: |
+          test
+  runner:
+    rps:
+      rps: 5
+      times: 1500
+  contexts:
+    namespaces:
+      count: 10
+      with_serviceaccount: true
+      serviceaccount_delay: 5
+    kubernetes.cfg:
+      prepoll_delay: 1
+      retries_total: 100
+      sleep_time: 1
