@@ -1,0 +1,23 @@
+---
+version: 2
+title: Create, read and delete daemonset with random name
+subtasks:
+- title: Run create/check/delete daemonset with constant runner
+  scenario:
+    Kubernetes.create_check_and_delete_daemonset:
+      image: {{ image_pause }}
+      node_labels:
+        rally: "daemonset"
+  runner:
+    constant:
+      concurrency : 1
+      times: 100
+  contexts:
+    namespaces:
+      count: 10
+      with_serviceaccount: true
+      serviceaccount_delay: 5
+    kubernetes.cfg:
+      prepoll_delay: 1
+      retries_total: 100
+      sleep_time: 1
