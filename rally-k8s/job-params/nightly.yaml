@@ -8,3 +8,4 @@
   image_busybox: "mirantis.azurecr.io/general/external/docker.io/library/busybox:1.32.0"
 
   aws_storage_class: "ebs-sc"
+  os_storage_class: "csi-sc-cinderplugin"
