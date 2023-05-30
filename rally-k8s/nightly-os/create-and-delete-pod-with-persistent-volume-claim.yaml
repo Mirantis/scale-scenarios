@@ -1,0 +1,30 @@
+---
+version: 2
+title: Create, read and delete pod with persistent volume claim
+subtasks:
+- title: Run create/read/delete pod with PVC with rps runner
+  scenario:
+    Kubernetes.create_and_delete_pod_with_persistent_volume_claim:
+      persistent_volume_claim:
+        size: 1Gi
+        storage_class: {{ os_storage_class }}
+        access_modes:
+        - ReadWriteOnce
+      image: {{ image_busybox }}
+      command:
+      - sleep
+      - "3600"
+      mount_path: /opt/check
+  runner:
+    constant:
+      concurrency: 5
+      times: 250
+  contexts:
+    namespaces:
+      count: 5
+      with_serviceaccount: true
+      serviceaccount_delay: 5
+    kubernetes.cfg:
+      prepoll_delay: 1
+      retries_total: 100
+      sleep_time: 1
