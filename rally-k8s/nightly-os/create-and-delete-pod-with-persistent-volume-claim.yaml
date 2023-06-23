@@ -1,4 +1,3 @@
----
 version: 2
 title: Create, read and delete pod with persistent volume claim
 subtasks:
@@ -15,6 +14,19 @@ subtasks:
       - sleep
       - "3600"
       mount_path: /opt/check
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                  - rally
+              topologyKey: kubernetes.io/hostname
+              namespaceSelector: {}
   runner:
     constant:
       concurrency: 5
