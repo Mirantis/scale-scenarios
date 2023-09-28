@@ -1,9 +1,9 @@
 ---
   GlanceImages.create_and_delete_image:
-  {% set http_server_with_glance_images = http_server_with_glance_images or "172.16.44.5" %}
+  {% set glance_image_url = glance_image_url or "http://download.cirros-cloud.net/0.3.5/cirros-0.3.5-x86_64-disk.img" %}
     -
       args:
-        image_location: "http://{{http_server_with_glance_images}}/cirros-0.4.0-x86_64-disk.img"
+        image_location: "{{glance_image_url}}"
         container_format: "bare"
         disk_format: "qcow2"
       runner:
