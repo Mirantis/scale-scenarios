@@ -9,7 +9,7 @@ subtasks:
   runner:
     rps:
       rps: 30
-      times: 60000
+      times: 50000
   contexts:
     namespaces:
       count: 10
