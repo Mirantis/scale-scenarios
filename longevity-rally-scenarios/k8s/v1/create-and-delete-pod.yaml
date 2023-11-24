@@ -2,7 +2,7 @@
   Kubernetes.create_and_delete_pod:
   -
     args:
-      image: kubernetes/pause
+      image: {{ image_pause }}
     runner:
       type: constant_for_duration
       concurrency: {{ concurrency }}
