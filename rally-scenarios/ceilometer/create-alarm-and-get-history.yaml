@@ -1,0 +1,23 @@
+---
+  CeilometerAlarms.create_alarm_and_get_history:
+    -
+      args:
+        meter_name: "ram_util"
+        threshold: 10.0
+        type: "threshold"
+        state: "ok"
+        statistic: "avg"
+        alarm_actions: ["http://localhost:8776/alarm"]
+        ok_actions: ["http://localhost:8776/ok"]
+        insufficient_data_actions: ["http://localhost:8776/notok"]
+      runner:
+        type: "constant"
+        times: {{ load * 4 * times_multiplier_ceilo }}
+        concurrency: {{ load * 4 }}
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0

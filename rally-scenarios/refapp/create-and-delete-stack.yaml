@@ -1,0 +1,21 @@
+---
+  version: 2
+  title: RefApp create and destroy
+  description: >
+    Creates RefApp heat template and destroys it
+  subtasks:
+    -
+      title: HeatStacks.create_and_delete_stack test
+      scenario:
+        HeatStacks.create_and_delete_stack:
+          template_path: "{{ current_path }}/refapp/templates/top.yaml.template"
+          files:
+            - /var/lib/rally/data/rally-scenarios/rally-scenarios/refapp/templates/scripts/service_boot.sh
+      runner:
+        constant:
+          times: {{ load * 2 * times_multiplier_stack }}
+          concurrency: {{ load * 2 }}
+      contexts:
+        users:
+          tenants: {{ load }}
+          users_per_tenant: 3

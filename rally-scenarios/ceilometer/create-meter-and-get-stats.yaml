@@ -1,0 +1,20 @@
+---
+  CeilometerStats.create_meter_and_get_stats:
+   -
+     args:
+       user_id: "user-id"
+       resource_id: "resource-id"
+       counter_volume: 1.0
+       counter_unit: ""
+       counter_type: "cumulative"
+     runner:
+       type: "constant"
+       times: {{ load * 4 * times_multiplier_ceilo }}
+       concurrency: {{ load * 4 }}
+     context:
+       users:
+         tenants: 2
+         users_per_tenant: 2
+     sla:
+       failure_rate:
+         max: 0

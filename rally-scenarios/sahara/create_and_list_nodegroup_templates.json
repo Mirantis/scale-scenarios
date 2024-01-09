@@ -1,0 +1,23 @@
+{
+    "SaharaNodeGroupTemplates.create_and_list_node_group_templates": [
+        {
+            "args": {
+                "flavor": {
+                    "name": "m1.small"
+                }
+            },
+            "runner": {
+                "type": "constant",
+                "times": {{ load * 4 * times_multiplier_sahara }},
+                "concurrency": {{ load * 4 }}
+            },
+            "context": {
+                "users": {
+                    "tenants": 5,
+                    "users_per_tenant": 1
+                }
+            },
+            "sla": {"failure_rate": {"max": 0}}
+        }
+    ]
+}

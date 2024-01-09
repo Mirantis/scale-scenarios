@@ -1,0 +1,14 @@
+---
+  CeilometerTraits.create_user_and_list_traits:
+    -
+      runner:
+        type: "constant"
+        times: {{ load * 4 * times_multiplier_ceilo }}
+        concurrency: {{ load * 4 }}
+      context:
+        users:
+          tenants: 2
+          users_per_tenant: 2
+      sla:
+        failure_rate:
+          max: 0

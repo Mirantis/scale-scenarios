@@ -1,0 +1,16 @@
+---
+  Authenticate.validate_ceilometer:
+    -
+      args:
+        repetitions: 2
+      runner:
+        type: "constant"
+        times: {{ load * 2 * times_multiplier_authenticate }}
+        concurrency: {{ load * 2 }}
+      context:
+        users:
+          tenants: 3
+          users_per_tenant: 5
+      sla:
+        failure_rate:
+          max: 0
