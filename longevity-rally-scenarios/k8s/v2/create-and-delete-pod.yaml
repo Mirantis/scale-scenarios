@@ -14,3 +14,7 @@ subtasks:
     namespaces:
       count: 3
       with_serviceaccount: true
+  sla:
+    failure_rate: {
+      max: {{ failure_rate_max }}
+    }
