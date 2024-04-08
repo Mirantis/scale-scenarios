@@ -32,4 +32,4 @@
         network: {}
       sla:
         failure_rate:
-          max: 0
+          max: {{ failure_rate_max }}
